@@ -69,7 +69,7 @@ public class RPCServRegProcessor implements
 				parseAppCfg(cfgRes);
 			}
 			if ("none".equals(servType)) {
-				System.out.println("δ����RPC�����");
+				System.out.println("RPC服务端未开启");
 				return;
 			}
 			regRPCExportBean(registry);

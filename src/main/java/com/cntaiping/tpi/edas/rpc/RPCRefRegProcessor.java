@@ -74,7 +74,7 @@ public class RPCRefRegProcessor implements
 				parseAppCfg(cfgRes);
 			}
 			if ("none".equals(refType)) {
-				System.out.println("δ����RPC�ͻ���");
+				System.out.println("RPC客户端未开启");
 				return;
 			}
 			Resource[] ress = applicationContext
