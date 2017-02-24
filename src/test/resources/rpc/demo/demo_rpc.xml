@@ -1,0 +1,4 @@
+<services>
+	<service interface="xxxxx.xxx" group="demo" version="1.0"
+		hessian="http://127.0.0.1:8080/xxx/xx" />
+</services>
