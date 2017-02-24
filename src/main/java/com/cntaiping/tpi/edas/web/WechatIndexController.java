@@ -30,13 +30,10 @@ public abstract class WechatIndexController extends BaseIndexController {
 		String code = req.getParameter("code");
 		String userCode = null;
 		if (StringUtils.isEmpty(code)) {
-			// redirect 需要appId
 			return redirectOAuth(req, resp);
 		} else {
-			// 调用微信API获取用户信息 需要appId对应的accessToken
 			userCode = wechatRpc.getUserCode(this.getClass().getName(), code);
 		}
-		// 如果用户为空，再次重定向
 		if (StringUtils.isEmpty(userCode)) {
 			return redirectOAuth(req, resp);
 		}

@@ -22,7 +22,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 				&& WechatIndexController.class
 						.isAssignableFrom(((HandlerMethod) handler)
 								.getBeanType()) && !path.endsWith("/index")) {
-			System.out.println("Œ¢–≈«Î«Û¿πΩÿ");
+			System.out.println("xxxxxxxxxxxxx");
 
 		}
 

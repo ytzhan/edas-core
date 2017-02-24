@@ -40,6 +40,12 @@ public class RemoteResult {
 		}
 		message.append(code).append(":").append(msg);
 	}
+	public void appendError(String msg) {
+		if (message.length() > 0) {
+			message.append(";");
+		}
+		message.append(msg);
+	}
 
 	public void attachData(Object data) {
 		this.data = data;

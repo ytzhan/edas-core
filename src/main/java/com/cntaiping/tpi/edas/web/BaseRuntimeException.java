@@ -1,6 +1,6 @@
 package com.cntaiping.tpi.edas.web;
 
-public class BaseException extends Exception {
+public class BaseRuntimeException extends RuntimeException {
 
 	/**
 	 * 
@@ -13,17 +13,17 @@ public class BaseException extends Exception {
 		return msg;
 	}
 
-	public BaseException(String msg) {
+	public BaseRuntimeException(String msg) {
 		super(msg);
 		this.msg = msg;
 	}
 
-	public BaseException(String msg, Throwable cause) {
+	public BaseRuntimeException(String msg, Throwable cause) {
 		super(msg, cause);
 		this.msg = msg;
 	}
 
-	public BaseException(Throwable cause) {
+	public BaseRuntimeException(Throwable cause) {
 		super(cause);
 		this.msg = cause.getMessage();
 	}
