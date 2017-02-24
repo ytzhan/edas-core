@@ -1,6 +1,5 @@
 package com.cntaiping.tpi.edas.rpc;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -44,7 +43,7 @@ public class RPCRefRegProcessor implements
 
 	}
 
-	protected void parseAppCfg(Resource cfgRes) throws IOException {
+	protected void parseAppCfg(Resource cfgRes) throws Exception {
 		Properties prop = new Properties();
 		InputStream in = null;
 		try {
@@ -75,7 +74,7 @@ public class RPCRefRegProcessor implements
 				parseAppCfg(cfgRes);
 			}
 			if ("none".equals(refType)) {
-				System.out.println("Î´¿ªÆôRPC¿Í»§¶Ë");
+				System.out.println("Î´ï¿½ï¿½ï¿½ï¿½RPCï¿½Í»ï¿½ï¿½ï¿½");
 				return;
 			}
 			Resource[] ress = applicationContext
