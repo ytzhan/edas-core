@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cntaiping.tpi.edas.web.remote.Result;
+
 public abstract class BaseController {
 	@InitBinder
 	void initBinder(WebDataBinder binder) {
@@ -16,20 +18,20 @@ public abstract class BaseController {
 	};
 	
 	@ExceptionHandler(BaseRuntimeException.class)
-	public @ResponseBody com.cntaiping.tpi.edas.web.RemoteResult runtimeExceptionHandler(BaseRuntimeException runtimeException) {
-		com.cntaiping.tpi.edas.web.RemoteResult rr = new com.cntaiping.tpi.edas.web.RemoteResult(false);
+	public @ResponseBody com.cntaiping.tpi.edas.web.remote.Result runtimeExceptionHandler(BaseRuntimeException runtimeException) {
+		com.cntaiping.tpi.edas.web.remote.Result rr = new com.cntaiping.tpi.edas.web.remote.Result(false);
 		rr.appendError(runtimeException.getMessage());
 		return rr;
 	}
 	@ExceptionHandler(BaseException.class)
-	public @ResponseBody com.cntaiping.tpi.edas.web.RemoteResult exceptionHandler(BaseException runtimeException) {
-		com.cntaiping.tpi.edas.web.RemoteResult rr = new com.cntaiping.tpi.edas.web.RemoteResult(false);
+	public @ResponseBody com.cntaiping.tpi.edas.web.remote.Result exceptionHandler(BaseException runtimeException) {
+		com.cntaiping.tpi.edas.web.remote.Result rr = new com.cntaiping.tpi.edas.web.remote.Result(false);
 		rr.appendError(runtimeException.getMessage());
 		return rr;
 	}
 	
-	protected RemoteResult errOutput(BindingResult result){
-		RemoteResult rr = new RemoteResult(false);
+	protected Result errOutput(BindingResult result){
+		Result rr = new Result(false);
 		for(ObjectError error:result.getAllErrors()){
 			rr.appendError(error.getCode(), error.getDefaultMessage());
 		}

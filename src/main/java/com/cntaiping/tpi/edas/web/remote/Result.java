@@ -1,6 +1,6 @@
-package com.cntaiping.tpi.edas.web;
+package com.cntaiping.tpi.edas.web.remote;
 
-public class RemoteResult {
+public class Result {
 
 	private boolean status;
 
@@ -20,16 +20,16 @@ public class RemoteResult {
 		return status;
 	}
 
-	public RemoteResult(Object data) {
+	public Result(Object data) {
 		this.status = true;
 		this.data = data;
 	}
 
-	public RemoteResult(boolean status) {
+	public Result(boolean status) {
 		this.status = status;
 	}
 
-	public RemoteResult(String code, String msg) {
+	public Result(String code, String msg) {
 		this.status = false;
 		message.append(code).append(":").append(msg);
 	}

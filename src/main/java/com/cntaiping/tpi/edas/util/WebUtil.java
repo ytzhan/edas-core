@@ -10,4 +10,8 @@ public final class WebUtil {
 		sb.append(protocol).append("://").append(host).append(url);
 		return sb.toString();
 	}
+	
+	public static final String PAGE_ACTION="_PAGE_ACTION";
+	
+	public static final String PAGE_VIEW="_PAGE_VIEW";
 }

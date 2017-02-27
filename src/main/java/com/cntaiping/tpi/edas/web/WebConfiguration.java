@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.cntaiping.tpi.edas.web.remote.RemoteMessageProcessor;
+import com.cntaiping.tpi.edas.web.remote.MessageProcessor;
 import com.cntaiping.tpi.edas.web.view.CustomViewResolver;
 import com.cntaiping.tpi.edas.wechat.rpc.WechatRpc;
 import com.cntaiping.tpi.edas.wechat.rpc.impl.LocalWechatRpcImpl;
@@ -53,7 +53,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	}
 	@Override
 	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {	
-		HandlerMethodReturnValueHandler hmr= new RemoteMessageProcessor(converters);
+		HandlerMethodReturnValueHandler hmr= new MessageProcessor(converters);
 		returnValueHandlers.add(hmr);
 		super.addReturnValueHandlers(returnValueHandlers);
 	}

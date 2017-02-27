@@ -12,11 +12,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor;
 
+import com.cntaiping.tpi.edas.annotation.RemoteBody;
 import com.cntaiping.tpi.edas.annotation.RemoteResult;
 
-public class RemoteMessageProcessor extends AbstractMessageConverterMethodProcessor {
+public class MessageProcessor extends AbstractMessageConverterMethodProcessor {
 
-	public RemoteMessageProcessor(List<HttpMessageConverter<?>> converters) {
+	public MessageProcessor(List<HttpMessageConverter<?>> converters) {
 		super(converters);
 	}
 
@@ -32,13 +33,15 @@ public class RemoteMessageProcessor extends AbstractMessageConverterMethodProces
 		mavContainer.setRequestHandled(true);
 		ServletServerHttpRequest inputMessage = createInputMessage(webRequest);
 		ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);
-		com.cntaiping.tpi.edas.web.RemoteResult rr = new com.cntaiping.tpi.edas.web.RemoteResult(returnValue);
-		writeWithMessageConverters(rr, returnType, inputMessage, outputMessage);
+		if(! (returnValue instanceof com.cntaiping.tpi.edas.web.remote.Result)){
+			returnValue = new com.cntaiping.tpi.edas.web.remote.Result(returnValue);
+		}
+		writeWithMessageConverters(returnValue, returnType, inputMessage, outputMessage);
 	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return false;
+		return parameter.hasParameterAnnotation(RemoteBody.class);
 	}
 
 	@Override

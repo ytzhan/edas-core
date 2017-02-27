@@ -1,0 +1,19 @@
+Page({
+	#foreach($function in $functions)$function:function(){
+		var _deferred=can.ajax({
+			url:"do/$function",
+			method:"GET",
+			contentType:"application/json", 
+			dataType : "json",
+			data : JSON.stringify(getCurrentPage().data)
+		});
+		_deferred.then(function(data){
+			alert("OK");
+		},function(){
+			alert("FAIL");
+		});
+	},#end
+	#if($data)onData:function(){
+		return $data;
+	}#end
+});
