@@ -75,10 +75,12 @@ public class PageControler implements ApplicationContextAware {
 		}
 	}
 
-	@RequestMapping(value = "/do/{action}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{action}", method = RequestMethod.POST)
 	@ResponseBody
-	public Object execute(@PathVariable String action, @RequestBody String json) {
-		return null;
+	public Object execute(@PathVariable String module, @PathVariable String app, @PathVariable String page,
+			@PathVariable String action, @RequestBody String json) {
+		PageAction pa = actionDispatcher.get(module, app, page);
+		return pa.execute(action, json);
 	}
 
 	@Autowired
