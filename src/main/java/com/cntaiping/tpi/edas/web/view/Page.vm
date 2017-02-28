@@ -8,9 +8,10 @@ Page({
 			data : JSON.stringify(getCurrentPage().data)
 		});
 		_deferred.then(function(data){
-			alert("OK");
+			window._data=data;
+			this.update(data);
 		},function(){
-			alert("FAIL");
+			alert("远程调用失败");
 		});
 	},#end
 	#if($data)onData:function(){

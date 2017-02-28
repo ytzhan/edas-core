@@ -26,11 +26,12 @@ import com.cntaiping.tpi.edas.action.PageAction;
 import com.cntaiping.tpi.edas.util.WebUtil;
 
 @Controller
-@RequestMapping(value = "/{module}/{app}/{page}")
+@RequestMapping(value = "/{module}")
 public class PageControler implements ApplicationContextAware {
-	private String PATH_TEMPLATE = "classpath:/stache/{0}/{1}/{2}/index.stache";
+	private String PAGE_PATH_TEMPLATE = "classpath:/templates/{0}/{1}/{2}/index.stache";
+	private String APP_PATH_RESOURCE = "classpath:/templates/{0}/{1}/{2}";
 
-	@RequestMapping(value = "/index.js", method = RequestMethod.GET)
+	@RequestMapping(value = "/{app}/{page}/index.js", method = RequestMethod.GET)
 	public ModelAndView indexJs(@PathVariable String module, @PathVariable String app, @PathVariable String page)
 			throws IOException {
 		PageAction action = actionDispatcher.get(module, app, page);
@@ -40,11 +41,25 @@ public class PageControler implements ApplicationContextAware {
 
 	}
 
-	@RequestMapping(value = "/index.stache", method = RequestMethod.GET)
+	@RequestMapping(value = "/{app}/{page}/index.stache", method = RequestMethod.GET)
 	public void indexStache(HttpServletResponse resp, @PathVariable String module, @PathVariable String app,
 			@PathVariable String page) throws IOException {
-		String path = MessageFormat.format(PATH_TEMPLATE, module, app, page);
+		String path = MessageFormat.format(PAGE_PATH_TEMPLATE, module, app, page);
 		Resource res = this.applicationContext.getResource(path);
+		if (res.exists()) {
+			render(resp, path, res);
+
+		} else {
+			resp.sendError(404);
+		}
+	}
+	
+	@RequestMapping(value = "/{app}/{path:.+}", method = RequestMethod.GET)
+	public void appResource(HttpServletResponse resp, @PathVariable String module, @PathVariable String app,
+			@PathVariable String path)
+			throws IOException {
+		String respath = MessageFormat.format(APP_PATH_RESOURCE, module, app, path);
+		Resource res = this.applicationContext.getResource(respath);
 		if (res.exists()) {
 			render(resp, path, res);
 

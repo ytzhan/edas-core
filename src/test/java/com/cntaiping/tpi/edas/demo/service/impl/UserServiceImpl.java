@@ -21,23 +21,23 @@ public class UserServiceImpl implements UserService {
 		//UserPo po = userMapper.selectById(id);
 		UserPo param = new UserPo();
 		param.setId(id);
-		UserPo po = user2Mapper.findOne(param);
+//		UserPo po = user2Mapper.findOne(param);
 		UserDto dto = new UserDto();
-		BeanUtils.copyProperties(po, dto);
+//		BeanUtils.copyProperties(po, dto);
 		return dto;
 	}
 
-	@Resource
-	private UserMapper userMapper;
-	@Resource
-	private User2Mapper user2Mapper;
-	
-	
-	public void setUser2Mapper(User2Mapper user2Mapper) {
-		this.user2Mapper = user2Mapper;
-	}
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
+//	@Resource
+//	private UserMapper userMapper;
+//	@Resource
+//	private User2Mapper user2Mapper;
+//	
+//	
+//	public void setUser2Mapper(User2Mapper user2Mapper) {
+//		this.user2Mapper = user2Mapper;
+//	}
+//	public void setUserMapper(UserMapper userMapper) {
+//		this.userMapper = userMapper;
+//	}
 
 }

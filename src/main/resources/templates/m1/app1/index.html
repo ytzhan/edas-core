@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+<link rel="stylesheet" href="/css/mobiscroll.custom-3.0.0.min.css" />
+<link rel="stylesheet" href="/css/mzui.css" />
+<title>canjs demo</title>
+</head>
+<body>
+<script id="tpl" type="text/template">
+<titlebar title="我的首页" menu_button=true>
+</titlebar>
+<div id="page"></div>
+<tabbar></tabbar>
+</script>
+<script id="page2" type="text/template">
+<text name="field1"/>
+<command text="切换远程Page" name="btn" type="success"/>
+</script>
+<script type="text/javascript" src="tpframework.js"></script>
+<script>
+	options={
+		onShow:function(){
+			switchPage("page2");
+		},
+		onLaungh:function(){
+			this.setTemplate($("#tpl").html());
+			Pages.push(_Page({
+				template:$("#page2").html(),
+				name:"page2",
+				onData:function(){
+					return {field1:"hello world!"}
+				},
+				onBtnClick:function(){
+					switchPage("page1/index.stache");
+				}
+			}));
+		}
+	};
+</script>
+</body>
+</html>
