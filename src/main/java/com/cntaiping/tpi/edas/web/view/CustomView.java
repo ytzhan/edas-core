@@ -24,6 +24,7 @@ public class CustomView extends AbstractTemplateView {
 		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION);
 		context.put("functions", action.getEntityFunctions());
 		ObjectMapper objectMapper = new ObjectMapper();
+		context.put("page", model.get("_page"));
 		context.put("data", objectMapper.writeValueAsString(action.createDefault()));
 		Template t = engine.getTemplate("/com/cntaiping/tpi/edas/web/view/Page.vm");
 		response.setContentType("application/json");

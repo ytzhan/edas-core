@@ -26,7 +26,7 @@ import com.cntaiping.tpi.edas.action.PageAction;
 import com.cntaiping.tpi.edas.util.WebUtil;
 
 @Controller
-@RequestMapping(value = "/{module}")
+@RequestMapping(value = "/m/{module}")
 public class PageControler implements ApplicationContextAware {
 	private String PAGE_PATH_TEMPLATE = "classpath:/templates/{0}/{1}/{2}/index.stache";
 	private String APP_PATH_RESOURCE = "classpath:/templates/{0}/{1}/{2}";
@@ -37,6 +37,7 @@ public class PageControler implements ApplicationContextAware {
 		PageAction action = actionDispatcher.get(module, app, page);
 		ModelAndView mav = new ModelAndView(WebUtil.PAGE_VIEW);
 		mav.addObject(WebUtil.PAGE_ACTION, action);
+		mav.addObject("_page",page);
 		return mav;
 
 	}
@@ -90,7 +91,7 @@ public class PageControler implements ApplicationContextAware {
 		}
 	}
 
-	@RequestMapping(value = "/{action}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{app}/{page}/{action}", method = RequestMethod.POST)
 	@ResponseBody
 	public Object execute(@PathVariable String module, @PathVariable String app, @PathVariable String page,
 			@PathVariable String action, @RequestBody String json) {

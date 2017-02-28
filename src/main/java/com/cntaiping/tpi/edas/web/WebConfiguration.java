@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.cntaiping.tpi.edas.web.remote.MessageProcessor;
@@ -41,11 +40,8 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Autowired
 	WebProperties webProperties;
 	List<HttpMessageConverter<?>> converters;
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new SessionInterceptor(webProperties))
-				.addPathPatterns("/**");
-		super.addInterceptors(registry);
-	}
+	
+	
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		this.converters = converters;

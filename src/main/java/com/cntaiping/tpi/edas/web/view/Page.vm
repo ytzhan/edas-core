@@ -1,11 +1,11 @@
 Page({
 	#foreach($function in $functions)$function:function(){
 		var _deferred=can.ajax({
-			url:"do/$function",
-			method:"GET",
+			url:"$page/$function",
+			type:"POST",
 			contentType:"application/json", 
 			dataType : "json",
-			data : JSON.stringify(getCurrentPage().data)
+			data : JSON.stringify(this.data)
 		});
 		_deferred.then(function(data){
 			window._data=data;
