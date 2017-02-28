@@ -7,9 +7,9 @@ Page({
 			dataType : "json",
 			data : JSON.stringify(this.data)
 		});
+		var _self=this;
 		_deferred.then(function(data){
-			window._data=data;
-			this.update(data);
+			_self.update(data);
 		},function(){
 			alert("远程调用失败");
 		});
