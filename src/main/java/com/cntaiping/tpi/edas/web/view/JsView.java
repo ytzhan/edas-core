@@ -1,7 +1,6 @@
 package com.cntaiping.tpi.edas.web.view;
 
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,38 +8,42 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.springframework.web.servlet.view.AbstractTemplateView;
+import org.apache.velocity.exception.ResourceNotFoundException;
+import org.springframework.web.servlet.view.AbstractView;
 
 import com.cntaiping.tpi.edas.action.PageAction;
 import com.cntaiping.tpi.edas.util.WebUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CustomView extends AbstractTemplateView {
+public class JsView extends AbstractView {
+	private String viewName;
+	private VelocityEngine engine;
+	public static final String DEFAULT_PAGE_JS = "/com/cntaiping/tpi/edas/web/view/default_page.js";
+
+	public JsView(String viewName, VelocityEngine engine) {
+		this.viewName = viewName;
+		this.engine = engine;
+	}
 
 	@Override
-	protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request,
+	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		VelocityContext context = new VelocityContext();
 		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION);
+		context.put("page", model.get(WebUtil.PAGE));
 		context.put("functions", action.getEntityFunctions());
 		ObjectMapper objectMapper = new ObjectMapper();
-		context.put("page", model.get("_page"));
 		context.put("data", objectMapper.writeValueAsString(action.createDefault()));
-		Template t = engine.getTemplate("/com/cntaiping/tpi/edas/web/view/Page.vm");
-		response.setContentType("application/json");
+		Template t = null;
+		try {
+			t = engine.getTemplate(WebUtil.WEB_ROOT+viewName);
+		} catch (ResourceNotFoundException e) {
+			t = engine.getTemplate(DEFAULT_PAGE_JS);
+		}
+		response.setContentType("text/javascript");
 		response.setCharacterEncoding("UTF-8");
 		t.merge(context, response.getWriter());
-	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		super.afterPropertiesSet();
-		engine = new VelocityEngine();
-		Properties p = new Properties();
-		p.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-		engine.init(p);
 	}
-
-	VelocityEngine engine;
 
 }

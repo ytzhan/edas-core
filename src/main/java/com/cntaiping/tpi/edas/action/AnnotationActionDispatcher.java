@@ -20,10 +20,6 @@ public class AnnotationActionDispatcher
 
 	}
 
-	private String createKey(String module, String app, String page) {
-		return module + ":" + app + ":" + page;
-	}
-
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		for (String beanName : registry.getBeanDefinitionNames()) {
@@ -35,7 +31,11 @@ public class AnnotationActionDispatcher
 				Class<?> beanClazz = this.getClass().getClassLoader().loadClass(bd.getBeanClassName());
 				Action action = beanClazz.getAnnotation(Action.class);
 				if (action != null) {
-					registry.registerAlias(beanName, createKey(action.module(), action.app(), action.page()));
+					String name = beanClazz.getPackage().getName() + "." + beanClazz.getSimpleName().toLowerCase();
+					if (name.endsWith("action")) {
+						name = name.substring(0, name.length() - 6);
+					}
+					registry.registerAlias(beanName, name);
 				}
 
 			} catch (Exception e) {
@@ -45,8 +45,8 @@ public class AnnotationActionDispatcher
 	}
 
 	@Override
-	public PageAction get(String module, String app, String page) {
-		return applicationContext.getBean(createKey(module, app, page), PageAction.class);
+	public PageAction get(String name) {
+		return applicationContext.getBean(name, PageAction.class);
 	}
 
 	@Override

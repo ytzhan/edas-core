@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Service
-public @interface RPC {
+public @interface Rpc {
 
 	Class<?>[] interfaceClass() default void.class;
 	

@@ -1,9 +1,9 @@
 package com.cntaiping.tpi.edas.demo.rpc.impl;
 
-import com.cntaiping.tpi.edas.annotation.RPC;
+import com.cntaiping.tpi.edas.annotation.Rpc;
 import com.cntaiping.tpi.edas.demo.dto.UserDto;
 import com.cntaiping.tpi.edas.demo.rpc.UserRpc;
-@RPC
+@Rpc
 public class UserRpcImpl implements UserRpc {
 
 	@Override

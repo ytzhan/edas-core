@@ -15,7 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.util.StringUtils;
 
-import com.cntaiping.tpi.edas.annotation.RPC;
+import com.cntaiping.tpi.edas.annotation.Rpc;
 import com.taobao.hsf.app.spring.util.HSFSpringProviderBean;
 
 public class RPCServRegProcessor implements
@@ -106,7 +106,7 @@ public class RPCServRegProcessor implements
 
 	private void registerHessian(BeanDefinitionRegistry registry,
 			String beanName, Class<?> beanClazz) {
-		RPC dp = beanClazz.getAnnotation(RPC.class);
+		Rpc dp = beanClazz.getAnnotation(Rpc.class);
 		if (dp != null) {
 			Class<?>[] intfs = dp.interfaceClass();
 			if (intfs.length == 1 && intfs[0] == void.class) {
@@ -126,7 +126,7 @@ public class RPCServRegProcessor implements
 
 	private void registerHSF(BeanDefinitionRegistry registry, String beanName,
 			Class<?> beanClazz) {
-		RPC dp = beanClazz.getAnnotation(RPC.class);
+		Rpc dp = beanClazz.getAnnotation(Rpc.class);
 		if (dp != null) {
 			Class<?>[] intfs = dp.interfaceClass();
 			if (intfs.length == 1 && intfs[0] == void.class) {
