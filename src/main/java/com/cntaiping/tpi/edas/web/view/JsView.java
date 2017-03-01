@@ -29,8 +29,8 @@ public class JsView extends AbstractView {
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		VelocityContext context = new VelocityContext();
-		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION);
-		context.put("page", model.get(WebUtil.PAGE));
+		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION_CLASS);
+		context.put("page", model.get(WebUtil.PAGE_ACTION));
 		context.put("functions", action.getEntityFunctions());
 		ObjectMapper objectMapper = new ObjectMapper();
 		context.put("data", objectMapper.writeValueAsString(action.createDefault()));

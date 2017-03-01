@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cntaiping.tpi.edas.action.IActionDispatcher;
@@ -44,17 +46,19 @@ public class AppController {
 		PageAction pa = actionDispatcher.get(path);
 		String view = MessageFormat.format(PAGE_PATH, module, app, page ,action+  ".js");
 		ModelAndView mav = new ModelAndView(view);
-		mav.addObject(WebUtil.PAGE_ACTION, pa);
-		mav.addObject(WebUtil.PAGE, page);
+		mav.addObject(WebUtil.PAGE_ACTION_CLASS, pa);
+		mav.addObject(WebUtil.PAGE_ACTION, page+"/"+action);
 		return mav;
 	}
 
-//	@RequestMapping("/{page}/{action}")
-//	public Object pageAction(@PathVariable String module, @PathVariable String app, @PathVariable String page,
-//			@PathVariable String action, @RequestBody String json) throws IOException {
-//		PageAction pa = actionDispatcher.get(module, app, page);
-//		return pa.execute(action, json);
-//	}
+	@RequestMapping("/{page}/{action}/{command}")
+	@ResponseBody
+	public Object pageAction(@PathVariable String module, @PathVariable String app, @PathVariable String page,
+			@PathVariable String action,@PathVariable String command, @RequestBody String json) throws IOException {
+		String path = MessageFormat.format(ACTION_PATH, module, app, page,action);
+		PageAction pa = actionDispatcher.get(path);
+		return pa.execute(command, json);
+	}
 
 	@Autowired
 	IActionDispatcher actionDispatcher;

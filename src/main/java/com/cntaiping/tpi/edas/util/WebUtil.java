@@ -12,7 +12,7 @@ public final class WebUtil {
 	}
 	
 	public static final String PAGE_ACTION="_PAGE_ACTION";
-	public static final String PAGE="_PAGE";
+	public static final String PAGE_ACTION_CLASS="_PAGE_ACTION_CLASS";
 	public static final String WEB_ROOT="/com/cntaiping/tpi/web";
 	
 }

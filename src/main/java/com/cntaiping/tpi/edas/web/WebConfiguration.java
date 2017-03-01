@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.velocity.VelocityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,7 @@ import com.cntaiping.tpi.edas.wechat.rpc.WechatRpc;
 import com.cntaiping.tpi.edas.wechat.rpc.impl.LocalWechatRpcImpl;
 
 @Configuration
-@EnableConfigurationProperties({ WebProperties.class, WechatProperties.class,VelocityProperties.class })
+@EnableConfigurationProperties({ WebProperties.class, WechatProperties.class })
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 	public WebConfiguration() {
 		System.out.println("WebConfiguration  running start .....");
