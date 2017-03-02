@@ -45,8 +45,8 @@ public class ActionWrapper {
 	}
 
 	public void init() {
-		this.actionClazz = action.getClass();
-		Action annotation = actionClazz.getAnnotation(Action.class);
+		//this.actionClazz = action.getClass();
+		Action annotation = action.getClass().getAnnotation(Action.class);
 		if (annotation != null && !StringUtils.isEmpty(annotation.value())) {
 			this.actionName = annotation.value();
 			this.actionClazz=annotation.entity();
@@ -58,25 +58,22 @@ public class ActionWrapper {
 			this.actionName = clazzName.substring(0, 1).toLowerCase() + clazzName.substring(1);
 		}
 
-		for (Method method : actionClazz.getMethods()) {
+		for (Method method : action.getClass().getMethods()) {
 			if (method.getAnnotation(EntityEvent.class) != null) {
 				EntityEvent ee=method.getAnnotation(EntityEvent.class);
 				entityEvents.put(ee.name(), method);
-				System.out.println("add event "+ee.name());
 			}else if (method.getAnnotation(RemoteFunction.class) != null){
 				RemoteFunction rf=method.getAnnotation(RemoteFunction.class);
 				remoteMethods.put(rf.name(), method);
 				remoteMethodParams.put(rf.name(), rf.param());
-				System.out.println("add remoteFunction "+rf.name());
 			}else if (method.getAnnotation(EntityFunction.class) != null){
 				EntityFunction ef=method.getAnnotation(EntityFunction.class);
-				if (ef.getClass()==NullClass.class){
+				if (ef.param()==NullClass.class){
 					defaultEntityMethodName=ef.name();
 					defaultEntityMethod=method;
 				}else{
 					remoteMethods.put(ef.name(), method);
 					remoteMethodParams.put(ef.name(), actionClazz);
-					System.out.println("add EntityFunction "+ef.name());
 				}
 			}
 
@@ -95,6 +92,7 @@ public class ActionWrapper {
 	}
 
 	public Object execute(String command, String json) {
+		System.out.println("run "+command+".....");
 		try {
 			if (command.equalsIgnoreCase(defaultEntityMethodName))
 				return defaultEntityMethod.invoke(action);
@@ -124,7 +122,10 @@ public class ActionWrapper {
 		try {
 			if (defaultEntityMethod!=null)	
 				return defaultEntityMethod.invoke(action);
-			return null;
+			else{
+				Object obj=actionClazz.newInstance();
+				return obj;
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(action.getClass().getName() + " method " + defaultEntityMethodName + " execute error!");

@@ -30,7 +30,10 @@ public class Entity extends PageActionDirective {
 		int count=node.jjtGetNumChildren();
 		if (count>0){
 			String url=node.jjtGetChild(0).literal();
-			writer.write("ajax(\""+actionWrapper.getActionName()+"."+url+"\")");
+			writer.write("ajax("+url);
+			String function=node.jjtGetChild(1).literal();
+			writer.write(",function()"+function);
+			writer.write(")");
 		}else{
 			writer.write("{}");
 		}

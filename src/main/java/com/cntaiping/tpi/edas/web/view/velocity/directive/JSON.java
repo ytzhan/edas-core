@@ -30,7 +30,7 @@ public class JSON extends Directive {
 			String url=node.jjtGetChild(0).literal();
 			writer.write("ajax("+url);
 			String function=node.jjtGetChild(1).literal();
-			writer.write(","+function);
+			writer.write(",function()"+function);
 			writer.write(")");
 		}else{
 			writer.write("#json:\"url not found\"");
