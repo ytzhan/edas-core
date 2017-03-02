@@ -60,6 +60,10 @@ public class ActionWrapper {
 			throw new RuntimeException(action.getClass().getName() + " method " + command + " execute error!");
 		}
 	}
+	
+	public String[] getEntityFunctions(){
+		return entityFunctions.keySet().toArray(new String[0]);
+	}
 
 	public String getActionName() {
 		return actionName;

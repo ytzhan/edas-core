@@ -33,7 +33,7 @@ public class JsView extends AbstractView {
 		ActionWrapper warpper = (ActionWrapper) model.get(WebUtil.PAGE_ACTION_CLASS);
 		PageAction action  =warpper.getAction();
 		context.put("page", model.get(WebUtil.PAGE_ACTION));
-		context.put("functions", action.getEntityFunctions());
+		context.put("functions", warpper.getEntityFunctions());
 		ObjectMapper objectMapper = new ObjectMapper();
 		context.put("data", objectMapper.writeValueAsString(action.createDefault()));
 		Template t = null;
