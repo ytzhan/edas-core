@@ -30,10 +30,11 @@ public class JsView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 		VelocityContext context = new VelocityContext();
 		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION_CLASS);
-		context.put("page", model.get(WebUtil.PAGE_ACTION));
-		context.put("functions", action.getEntityFunctions());
-		ObjectMapper objectMapper = new ObjectMapper();
-		context.put("data", objectMapper.writeValueAsString(action.createDefault()));
+		//context.put("page", model.get(WebUtil.PAGE_ACTION));
+		//context.put("functions", action.getEntityFunctions());
+		//ObjectMapper objectMapper = new ObjectMapper();
+		//context.put("data", objectMapper.writeValueAsString(action.createDefault()));
+		context.put("_pageObject", action);
 		Template t = null;
 		try {
 			t = engine.getTemplate(WebUtil.WEB_ROOT+viewName);

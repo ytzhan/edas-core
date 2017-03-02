@@ -39,6 +39,10 @@ public class CanjsViewResolver implements ViewResolver, Ordered, InitializingBea
 		p.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
 		p.put("input.encoding", "UTF-8");
 		p.put("output.encoding", "UTF-8");
+		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.Entity");
+		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.DefaultEntity");
+		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.UpateEvents");
+		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.JSON");
 		engine.init(p);
 	}
 
