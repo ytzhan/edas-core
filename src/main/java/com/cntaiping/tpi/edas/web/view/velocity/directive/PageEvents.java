@@ -12,7 +12,7 @@ import org.apache.velocity.runtime.parser.node.Node;
 
 import com.cntaiping.tpi.edas.action.ActionWrapper;
 
-public class pageEvents extends PageActionDirective {
+public class PageEvents extends PageActionDirective {
 
 	@Override
 	public String getName() {

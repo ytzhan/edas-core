@@ -62,17 +62,22 @@ public class ActionWrapper {
 			if (method.getAnnotation(EntityEvent.class) != null) {
 				EntityEvent ee=method.getAnnotation(EntityEvent.class);
 				entityEvents.put(ee.name(), method);
+				System.out.println("add event "+ee.name());
 			}else if (method.getAnnotation(RemoteFunction.class) != null){
 				RemoteFunction rf=method.getAnnotation(RemoteFunction.class);
 				remoteMethods.put(rf.name(), method);
 				remoteMethodParams.put(rf.name(), rf.param());
+				System.out.println("add remoteFunction "+rf.name());
 			}else if (method.getAnnotation(EntityFunction.class) != null){
 				EntityFunction ef=method.getAnnotation(EntityFunction.class);
 				if (ef.getClass()==NullClass.class){
 					defaultEntityMethodName=ef.name();
 					defaultEntityMethod=method;
-				}else
+				}else{
 					remoteMethods.put(ef.name(), method);
+					remoteMethodParams.put(ef.name(), actionClazz);
+					System.out.println("add EntityFunction "+ef.name());
+				}
 			}
 
 		}

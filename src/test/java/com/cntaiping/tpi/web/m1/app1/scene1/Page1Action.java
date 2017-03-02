@@ -30,7 +30,7 @@ public class Page1Action extends PageAction{
 	
 	@RemoteFunction(name="rpc",param=NullClass.class)
 	public Object remoteCall(){
-		return null;
+		return new Object();
 	}
 	
 }
