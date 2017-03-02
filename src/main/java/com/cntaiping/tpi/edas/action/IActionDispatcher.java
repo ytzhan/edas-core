@@ -1,5 +1,5 @@
 package com.cntaiping.tpi.edas.action;
 
 public interface IActionDispatcher {
-	public PageAction get(String name);
+	public ActionWrapper get(String module,String app,String scene,String action);
 }

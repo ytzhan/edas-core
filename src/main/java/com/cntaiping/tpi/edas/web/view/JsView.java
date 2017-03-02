@@ -11,6 +11,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.web.servlet.view.AbstractView;
 
+import com.cntaiping.tpi.edas.action.ActionWrapper;
 import com.cntaiping.tpi.edas.action.PageAction;
 import com.cntaiping.tpi.edas.util.WebUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,12 +30,13 @@ public class JsView extends AbstractView {
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		VelocityContext context = new VelocityContext();
-		PageAction action = (PageAction) model.get(WebUtil.PAGE_ACTION_CLASS);
+		ActionWrapper warpper = (ActionWrapper) model.get(WebUtil.PAGE_ACTION_CLASS);
+		PageAction action  =warpper.getAction();
 		//context.put("page", model.get(WebUtil.PAGE_ACTION));
-		//context.put("functions", action.getEntityFunctions());
+		//context.put("functions", warpper.getEntityFunctions());
 		//ObjectMapper objectMapper = new ObjectMapper();
 		//context.put("data", objectMapper.writeValueAsString(action.createDefault()));
-		context.put("_pageObject", action);
+		context.put("_pageObject", warpper);
 		Template t = null;
 		try {
 			t = engine.getTemplate(WebUtil.WEB_ROOT+viewName);
