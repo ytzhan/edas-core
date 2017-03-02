@@ -1,57 +1,55 @@
 package com.cntaiping.tpi.edas.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.util.StringUtils;
 
-import com.cntaiping.tpi.edas.annotation.Action;
+import com.cntaiping.tpi.edas.util.WebUtil;
 
-public class AnnotationActionDispatcher
-		implements IActionDispatcher, BeanDefinitionRegistryPostProcessor, ApplicationContextAware {
-	ApplicationContext applicationContext;
+public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactoryPostProcessor {
+	Logger logger = LoggerFactory.getLogger(getClass());
+	Map<String, SceneDef> scenes = new HashMap<String, SceneDef>(32);
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
-	}
-
-	@Override
-	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-		for (String beanName : registry.getBeanDefinitionNames()) {
-			BeanDefinition bd = registry.getBeanDefinition(beanName);
-			if (StringUtils.isEmpty(bd.getBeanClassName())) {
-				continue;
-			}
-			try {
-				Class<?> beanClazz = this.getClass().getClassLoader().loadClass(bd.getBeanClassName());
-				Action action = beanClazz.getAnnotation(Action.class);
-				if (action != null) {
-					String name = beanClazz.getPackage().getName() + "." + beanClazz.getSimpleName().toLowerCase();
-					if (name.endsWith("action")) {
-						name = name.substring(0, name.length() - 6);
-					}
-					registry.registerAlias(beanName, name);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
+		Map<String, PageAction> actions = beanFactory.getBeansOfType(PageAction.class);
+		for (PageAction action : actions.values()) {
+			SceneDef scene = findScene(action.getClass().getPackage());
+			if(scene != null){
+				scene.addAction(new ActionWrapper(action));
 			}
 		}
 	}
 
-	@Override
-	public PageAction get(String name) {
-		return applicationContext.getBean(name, PageAction.class);
+	private SceneDef findScene(Package pack) {
+		String packName = pack.getName();
+		packName = packName.substring(WebUtil.WEB_PKG_ROOT_LEN);
+		SceneDef scene = scenes.get(packName);
+		if (scene != null) {
+			return scene;
+		}
+		String[] parts = packName.split("\\.");
+		if (parts.length == 3) {
+			scene = new SceneDef(parts[0], parts[1], parts[2]);
+			scenes.put(packName, scene);
+			return scene;
+		} else {
+			logger.error("Action包路径{}不符合规范{}", pack.getName(), WebUtil.WEB_PKG_ROOT + "[module].[app].[scene]");
+			return null;
+		}
+
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
+	public ActionWrapper get(String module,String app,String scene,String action) {
+		SceneDef sceneDef = scenes.get(module+"."+app+"."+scene);
+		if(sceneDef != null)
+			return sceneDef.getAction(action);
+		return null;
 	}
-
 }

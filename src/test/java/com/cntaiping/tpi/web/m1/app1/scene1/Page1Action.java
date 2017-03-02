@@ -1,4 +1,4 @@
-package com.cntaiping.tpi.web.m1.app1.page1;
+package com.cntaiping.tpi.web.m1.app1.scene1;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import com.cntaiping.tpi.edas.annotation.EntityFunction;
 
 
 @Action
-public class IndexAction extends PageAction implements IDefaultEntity{
+public class Page1Action extends PageAction implements IDefaultEntity{
 	@EntityFunction(name="onCmdClick")
 	public Object action1(Object entity){
 		Map result=new HashMap();

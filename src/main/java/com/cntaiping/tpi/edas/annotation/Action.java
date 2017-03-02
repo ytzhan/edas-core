@@ -11,4 +11,5 @@ import org.springframework.stereotype.Service;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface Action {
+	String value() default "";
 }
