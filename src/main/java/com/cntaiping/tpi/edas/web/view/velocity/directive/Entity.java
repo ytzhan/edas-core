@@ -10,8 +10,9 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-public class Entity extends Directive {
+import com.cntaiping.tpi.edas.action.ActionWrapper;
 
+public class Entity extends PageActionDirective {
 	@Override
 	public String getName() {
 		return "entity";
@@ -19,19 +20,17 @@ public class Entity extends Directive {
 
 	@Override
 	public int getType() {
-		return Directive.BLOCK;
+		return Directive.LINE;
 	}
 
 	@Override
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+		ActionWrapper actionWrapper=getActionWrapper(context);
 		int count=node.jjtGetNumChildren();
 		if (count>0){
 			String url=node.jjtGetChild(0).literal();
-			writer.write("ajax("+url);
-			String function=node.jjtGetChild(1).literal();
-			writer.write(","+function);
-			writer.write(")");
+			writer.write("ajax(\""+actionWrapper.getActionName()+"."+url+"\")");
 		}else{
 			writer.write("{}");
 		}

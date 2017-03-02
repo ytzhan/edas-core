@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EntityFunction {
-	public String name() default "";
-	public Class param() default NullClass.class;//NullClass为带默认值的空实体对象
+public @interface RemoteFunction {
+	public String name();
+	public Class param();
 }

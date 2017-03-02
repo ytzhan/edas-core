@@ -10,8 +10,11 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-public class DefaultEntity extends Directive {
+import com.cntaiping.tpi.edas.action.ActionWrapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+public class DefaultEntity extends PageActionDirective {
+	private ObjectMapper objectMapper=new ObjectMapper();
 	@Override
 	public String getName() {
 		return "defaultEntity";
@@ -25,7 +28,8 @@ public class DefaultEntity extends Directive {
 	@Override
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
-		writer.write("{}");
+		ActionWrapper actionWrapper=getActionWrapper(context);
+		writer.write(objectMapper.writeValueAsString(actionWrapper.defaultEntity()));
 		return false;
 	}
 

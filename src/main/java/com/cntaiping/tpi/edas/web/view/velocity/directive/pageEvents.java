@@ -10,13 +10,14 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-public class UpateEvents extends Directive {
+import com.cntaiping.tpi.edas.action.ActionWrapper;
+
+public class pageEvents extends PageActionDirective {
 
 	@Override
 	public String getName() {
-		return "updateEvents";
+		return "entityEvents";
 	}
-
 
 	@Override
 	public int getType() {
@@ -26,7 +27,14 @@ public class UpateEvents extends Directive {
 	@Override
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
-		writer.write("a:{},b:{}");
+		ActionWrapper action=getActionWrapper(context);
+		String[] events=action.getEntityEvents();
+		String actionName=action.getActionName();
+		for (int i=0;i<events.length;i++){
+			writer.write(events[i]+":function(){this.update(\""+actionName+"."+events[i]+");}");
+			if (i>0)
+				writer.write(",");
+		}
 		return false;
 	}
 
