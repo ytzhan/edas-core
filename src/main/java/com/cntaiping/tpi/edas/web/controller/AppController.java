@@ -53,7 +53,7 @@ public class AppController {
 	public Object pageAction(@PathVariable String module, @PathVariable String app, @PathVariable String page,@PathVariable String scene,
 			 @PathVariable String command, @RequestBody String json) throws IOException {
 		ActionWrapper pa = actionDispatcher.get(module,app,scene,page);
-		return pa.getAction().execute(command, json);
+		return pa.execute(command, json);
 	}
 
 	@Autowired

@@ -2,8 +2,6 @@ package com.cntaiping.tpi.edas.action;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.cntaiping.tpi.edas.action.intf.IDefaultEntity;
 import com.cntaiping.tpi.edas.action.intf.IDeleteEntity;
@@ -15,7 +13,6 @@ import com.cntaiping.tpi.edas.annotation.EntityFunction;
 
 
 public abstract class PageAction{
-	private Map<String,String> alias = new HashMap<String,String>();
 	private boolean hasInterface(Class<?> intf){
 		Class<?>[] intfs=this.getClass().getInterfaces();
 		for (Class<?> _intf:intfs){
@@ -72,7 +69,6 @@ public abstract class PageAction{
 			EntityFunction ef = null;
 			if ((ef=method.getAnnotation(EntityFunction.class))!=null){
 				_methods.add(ef.name());
-				this.alias.put(ef.name(), method.getName());
 			}
 			
 		}
@@ -83,10 +79,6 @@ public abstract class PageAction{
 	
 	public Object execute(String action,String json){
 		try {
-			String alia = alias.get(action);
-			if(alia != null){
-				action = alia;
-			}
 			Method method=this.getClass().getMethod(action, Object.class);
 			return method.invoke(this, json);
 		} catch (Exception e) {
