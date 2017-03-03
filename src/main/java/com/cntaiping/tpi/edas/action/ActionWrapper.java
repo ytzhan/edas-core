@@ -73,12 +73,11 @@ public class ActionWrapper {
 				remoteMethodParams.put(rf.name(), rf.param());
 			}else if (method.getAnnotation(EntityFunction.class) != null){
 				EntityFunction ef=method.getAnnotation(EntityFunction.class);
-				if (ef.param()==NullClass.class){
+				if (ef.name().length()==0){
 					defaultEntityMethodName=ef.name();
 					defaultEntityMethod=method;
 				}else{
-					remoteMethods.put(ef.name(), method);
-					remoteMethodParams.put(ef.name(), actionClazz);
+					entityMethods.put(ef.name(), method);
 				}
 			}
 
@@ -113,6 +112,7 @@ public class ActionWrapper {
 						return method.invoke(action, jsonToObject(json,actionClazz));
 					else{
 						method = remoteMethods.get(command);
+						System.out.println(command+" : "+method);
 						if (method!=null){
 							Class c=remoteMethodParams.get(command);
 							if (c==NullClass.class)
@@ -124,6 +124,39 @@ public class ActionWrapper {
 				}
 			}
 			throw new RuntimeException(action.getClass().getName()+"没有实现"+command+"方法");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(action.getClass().getName() + " method " + command + " execute error!");
+		}
+	}
+	
+	public Object _execute(String command,String json){
+		try {
+			if (command.equalsIgnoreCase(defaultEntityMethodName))
+				return defaultEntityMethod.invoke(action);
+			else{
+				Method method = entityEvents.get(command);
+				if (method!=null)
+					return method.invoke(action, jsonToObject(json,actionClazz));
+				else{
+					method = entityMethods.get(command);
+					if (method!=null)
+						return method.invoke(action, jsonToObject(json,actionClazz));
+					else{
+						method = remoteMethods.get(command);
+						System.out.println(command+" : "+method);
+						if (method!=null){
+							Class c=remoteMethodParams.get(command);
+							if (c==NullClass.class)
+								return method.invoke(action);
+							else
+								return method.invoke(action, jsonToObject(json,remoteMethodParams.get(command)));
+						}else{
+							return method.invoke(command);
+						}
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(action.getClass().getName() + " method " + command + " execute error!");
