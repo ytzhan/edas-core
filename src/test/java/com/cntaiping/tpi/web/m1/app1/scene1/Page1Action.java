@@ -30,7 +30,9 @@ public class Page1Action extends PageAction{
 	
 	@RemoteFunction(name="rpc",param=NullClass.class)
 	public Object remoteCall(){
-		return new Object();
+		Map result=new HashMap();
+		result.put("abc", "data2");
+		return result;
 	}
 	
 }

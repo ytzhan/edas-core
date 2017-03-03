@@ -100,7 +100,6 @@ public class ActionWrapper {
 	}
 
 	public Object execute(String command, String json) {
-		System.out.println("run "+command+".....");
 		try {
 			if (command.equalsIgnoreCase(defaultEntityMethodName))
 				return defaultEntityMethod.invoke(action);
@@ -114,8 +113,13 @@ public class ActionWrapper {
 						return method.invoke(action, jsonToObject(json,actionClazz));
 					else{
 						method = remoteMethods.get(command);
-						if (method!=null)
-							return method.invoke(action, jsonToObject(json,remoteMethodParams.get(command)));
+						if (method!=null){
+							Class c=remoteMethodParams.get(command);
+							if (c==NullClass.class)
+								return method.invoke(action);
+							else
+								return method.invoke(action, jsonToObject(json,remoteMethodParams.get(command)));
+						}
 					}
 				}
 			}

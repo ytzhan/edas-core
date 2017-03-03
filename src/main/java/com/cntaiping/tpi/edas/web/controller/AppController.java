@@ -52,13 +52,22 @@ public class AppController {
 
 	@RequestMapping(value="/{page}/{command}",method=RequestMethod.POST)
 	@ResponseBody
-	public Object pageAction(@PathVariable String module, @PathVariable String app, @PathVariable String scene, @PathVariable String page,
+	public Object postPageAction(@PathVariable String module, @PathVariable String app, @PathVariable String scene, @PathVariable String page,
 			 @PathVariable String command, @RequestBody String json) throws IOException {
 		System.out.println("run "+command);
 		ActionWrapper pa = actionDispatcher.get(module,app,scene,page);
 		return pa.execute(command, json);
 	}
 
+	@RequestMapping(value="/{page}/{command}",method=RequestMethod.GET)
+	@ResponseBody
+	public Object getPageAction(@PathVariable String module, @PathVariable String app, @PathVariable String scene, @PathVariable String page,
+			 @PathVariable String command) throws IOException {
+		System.out.println("run "+command);
+		ActionWrapper pa = actionDispatcher.get(module,app,scene,page);
+		return pa.execute(command, "");
+	}
+	
 	@Autowired
 	IActionDispatcher actionDispatcher;
 }
