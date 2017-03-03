@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
@@ -12,9 +14,12 @@ import com.cntaiping.tpi.edas.annotation.EntityEvent;
 import com.cntaiping.tpi.edas.annotation.EntityFunction;
 import com.cntaiping.tpi.edas.annotation.NullClass;
 import com.cntaiping.tpi.edas.annotation.RemoteFunction;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ActionWrapper {
+	private Logger logger = LoggerFactory.getLogger(getClass());
+			
 	public String getDefaultEntityMethodName() {
 		return defaultEntityMethodName;
 	}
@@ -78,15 +83,18 @@ public class ActionWrapper {
 			}
 
 		}
-
+		
+		objectMapper=new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 	
-	private ObjectMapper objectMapper=new ObjectMapper();
+	private ObjectMapper objectMapper;
 	
-	private Object jsonToObject(String json,Class clazz){
+	private Object jsonToObject(String json,Class<?> clazz){
 		try{
 			return objectMapper.readValue(json, clazz);
 		}catch (Exception ex){
+			logger.error("序列化{}为{}错误", json,clazz, ex);
 			throw new RuntimeException("序列化\n\t"+ json +"\n为"+clazz.getName()+" 错误！");
 		}
 	}
