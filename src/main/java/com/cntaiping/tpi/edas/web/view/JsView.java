@@ -12,9 +12,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.cntaiping.tpi.edas.action.ActionWrapper;
-import com.cntaiping.tpi.edas.action.PageAction;
 import com.cntaiping.tpi.edas.util.WebUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsView extends AbstractView {
 	private String viewName;
@@ -31,7 +29,7 @@ public class JsView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 		VelocityContext context = new VelocityContext();
 		ActionWrapper warpper = (ActionWrapper) model.get(WebUtil.PAGE_ACTION_CLASS);
-		PageAction action  =warpper.getAction();
+		//PageAction action  =warpper.getAction();
 		//context.put("page", model.get(WebUtil.PAGE_ACTION));
 		//context.put("functions", warpper.getEntityFunctions());
 		//ObjectMapper objectMapper = new ObjectMapper();

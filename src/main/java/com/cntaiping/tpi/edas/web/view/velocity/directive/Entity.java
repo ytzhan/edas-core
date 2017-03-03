@@ -10,8 +10,6 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-import com.cntaiping.tpi.edas.action.ActionWrapper;
-
 public class Entity extends PageActionDirective {
 	@Override
 	public String getName() {
@@ -26,7 +24,7 @@ public class Entity extends PageActionDirective {
 	@Override
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
-		ActionWrapper actionWrapper=getActionWrapper(context);
+		//ActionWrapper actionWrapper=getActionWrapper(context);
 		int count=node.jjtGetNumChildren();
 		if (count>0){
 			String url=node.jjtGetChild(0).literal();

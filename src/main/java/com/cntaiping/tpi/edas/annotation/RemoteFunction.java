@@ -9,5 +9,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RemoteFunction {
 	public String name();
-	public Class param();
+	public Class<?> param();
 }

@@ -34,7 +34,7 @@ public class ActionWrapper {
 
 	private Map<String, Method> entityEvents = new HashMap<String, Method>();
 	private Map<String, Method> remoteMethods = new HashMap<String, Method>();
-	private Map<String, Class> remoteMethodParams = new HashMap<String, Class>();
+	private Map<String, Class<?>> remoteMethodParams = new HashMap<String, Class<?>>();
 	private Map<String, Method> entityMethods = new HashMap<String, Method>();
 	private String defaultEntityMethodName=null;
 	private Method defaultEntityMethod=null;

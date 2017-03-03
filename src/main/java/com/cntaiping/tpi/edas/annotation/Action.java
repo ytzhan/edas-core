@@ -12,5 +12,5 @@ import org.springframework.stereotype.Service;
 @Service
 public @interface Action {
 	public String value() default "";
-	public Class entity();
+	public Class<?> entity();
 }
