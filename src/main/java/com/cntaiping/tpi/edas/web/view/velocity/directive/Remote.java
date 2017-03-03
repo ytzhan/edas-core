@@ -10,11 +10,11 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-public class JSON extends Directive {
+public class Remote extends Directive {
 
 	@Override
 	public String getName() {
-		return "json";
+		return "remote";
 	}
 
 	@Override
@@ -28,10 +28,10 @@ public class JSON extends Directive {
 		int count=node.jjtGetNumChildren();
 		if (count>0){
 			String url=node.jjtGetChild(0).literal();
-			writer.write("ajax("+url);
+			writer.write("remote("+url);
 			String function=node.jjtGetChild(1).literal();
-			writer.write(",function()"+function);
-			writer.write(")");
+			writer.write(")"+function);
+			writer.write("");
 		}else{
 			writer.write("#json:\"url not found\"");
 		}

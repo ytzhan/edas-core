@@ -18,7 +18,7 @@ public class Entity extends PageActionDirective {
 
 	@Override
 	public int getType() {
-		return Directive.LINE;
+		return Directive.BLOCK;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class Entity extends PageActionDirective {
 			String url=node.jjtGetChild(0).literal();
 			writer.write("ajax("+url);
 			String function=node.jjtGetChild(1).literal();
-			writer.write(",function()"+function);
+			writer.write(",this.data,function(_entity)"+function);
 			writer.write(")");
 		}else{
 			writer.write("{}");

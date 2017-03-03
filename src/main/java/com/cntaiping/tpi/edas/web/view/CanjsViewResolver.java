@@ -42,7 +42,7 @@ public class CanjsViewResolver implements ViewResolver, Ordered, InitializingBea
 		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.Entity");
 		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.DefaultEntity");
 		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.PageEvents");
-		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.JSON");
+		engine.loadDirective("com.cntaiping.tpi.edas.web.view.velocity.directive.Remote");
 		engine.init(p);
 	}
 

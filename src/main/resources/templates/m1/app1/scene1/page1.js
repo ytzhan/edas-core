@@ -5,8 +5,13 @@ Page({
 	},
 	onAbcChanged:function(){
 		//手写远程调用
-		#json("/page1/rpc"){
+		#remote("/page1/rpc").post({a:23},function(_data){
 			alert("Ok");
-		}#end
+		});#end
+	},
+	onEntityChanged:function(){
+		#entity("page1/entity"){
+			alert("ok2");
+		}#end;
 	}
 });
