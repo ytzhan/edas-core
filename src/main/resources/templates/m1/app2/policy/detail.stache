@@ -17,7 +17,7 @@
 </view>
 
 <view title="我的信息" id="toast">
-	<text name="field1" label="姓名" />
+	<text name="name" label="姓名" />
 	<switch id ="sw2" name="field2" label="出生日期" data-options='["错","对"]'  />
 </view>
 <view title="详细信息">
@@ -26,7 +26,7 @@
 </view>
  
 <view name="view1" title="获取验证码示例">
-	<vcode label="验证码" name="getcode" tip="请输入验证码" text="获取验证码" />
+	<vcode label="邮箱地址" name="email" tip="请输入验证码" text="获取验证码" />
 	<vcode label="验证码" name="vcode" tip="请输入验证码" src="../img/vcode.jpg" />		
 </view>
 
@@ -76,9 +76,7 @@
 </view>
 
 
-<command type="success" text="递交"/>
-<command text="取消"  type="gray"/>
-<command name="sure" text="确认"  size="big" type="success"/>
-<command text="确认"  size="big" type="darkgray" id="cancel"/>
+<command name="sure" text="保存"  size="big" type="success"/>
+<command name="back" text="返回列表"  size="big" type="default" />
 
 

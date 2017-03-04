@@ -13,8 +13,78 @@ import com.cntaiping.tpi.edas.annotation.RemoteFunction;
 import com.cntaiping.tpi.edas.demo.dto.UserDto;
 
 
-@Action(value="detail",entity=UserDto.class)
+@Action(value="index",entity=UserDto.class)
 public class Page1Action2 extends PageAction{
+	@RemoteFunction(name = "firstPage", param = NullClass.class)
+	public Object firstPage(){
+		int i=1;
+		ArrayList result=new ArrayList();
+		HashMap paramMap=new HashMap();
+		paramMap.put("a",i*100+23);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+32);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+33);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+34);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+35);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+36);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+37);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+38);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+39);
+		result.add(paramMap);
 
+		HashMap resultMap=new HashMap();
+		
+		return this.buildPageResult(result, 10);
+	}
+	
+	
+	@RemoteFunction(name = "nextPage", param = Integer.class)
+	public Object nextPage(int page){
+		int i=page;
+		ArrayList result=new ArrayList();
+		HashMap paramMap=new HashMap();
+		paramMap.put("a",i*100+23);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+32);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+33);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+34);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+35);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+36);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+37);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+38);
+		result.add(paramMap);
+		paramMap=new HashMap();
+		paramMap.put("a",i*100+39);
+		result.add(paramMap);
+		return result;
+	}
 	
 }
