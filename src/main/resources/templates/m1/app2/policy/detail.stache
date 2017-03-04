@@ -1,0 +1,84 @@
+<view title="搜索框示例">
+		<search tip="请输入您所要查询的关键字" name="search"/>
+</view>
+
+<view title="单选示例1" >		
+	<radio  id="r1" name="radio"  data-options='{红色:"red",蓝色:"blue"}' />
+</view>
+
+<view title="单选示例2" 	>		
+	<radio   name="radio" data-options='{红色:"red",蓝色:"blue"}' />
+</view>
+<view title="多选示例" 	>		
+	<checkbox id="ch1"  name="ch" data-options='{苹果:"apple",香蕉:"banana"}'  />
+</view>
+<view title="多选示例" 	>		
+	<checkbox   name="ch"   data-options='{苹果:"apple",香蕉:"banana"}' />
+</view>
+
+<view title="我的信息" id="toast">
+	<text name="field1" label="姓名" />
+	<switch id ="sw2" name="field2" label="出生日期" data-options='["错","对"]'  />
+</view>
+<view title="详细信息">
+	<text id="df" name="field1" label="姓名" />
+	<switch id ="sw1" name="field2" label="出生日期" data-options='["错","对"]'/>
+</view>
+ 
+<view name="view1" title="获取验证码示例">
+	<vcode label="验证码" name="getcode" tip="请输入验证码" text="获取验证码" />
+	<vcode label="验证码" name="vcode" tip="请输入验证码" src="../img/vcode.jpg" />		
+</view>
+
+<view title="时间控件示例">
+	<date label="投保时间" name="startDate" tip="__年__月__日"  start="2017-10-01 " end="2018-10-01" id="tt" />	
+</view>
+
+<view title="多行文本输入示例">
+	<multitext tip="请输入文本" name="direction"  row="4"/>
+</view>
+
+
+
+<view title="下拉选择示例" 	>		
+	<dropdown  name="citys" id="citys" label="城市选择控件" align="right"
+		 data-options='{深圳:"sz" ,珠海:"zh"}'/>
+	<dropdown  label="城市选择控件" name="area" id="area" align="right"
+		data-parent="citys" data-options='{
+			zh:{香洲:"xz",金湾:"jw"},
+   	 		sz:{南山:"ns",福田:"ft",罗湖:"lh"}
+       	}' />
+</view>
+
+
+<view title="下拉选择示例" 	>	
+	<dropdown_mobi  label="城市选择" name="chose1"  id="new"
+		data-options='{深圳:"sz" ,珠海:"zh"}'/>
+	<dropdown_mobi  label="城市选择" name="chose2"  id="chose2" 
+		data-parent="chose1" data-options='{
+			zh:{香洲:"xz",金湾:"jw"},
+   	 		sz:{南山:"ns",福田:"ft",罗湖:"lh"}
+       	}' />
+</view>
+
+<view title="grounp option示例" >	
+	<groupopt  name="card"  id="gp" label="地址" 
+		data-options='[
+    		{value:"USA",opt:[{key:"01",txt:"洛杉矶"},{key:"02",txt:"纽约"}]},
+    		{value:"China",opt:[{key:"03",txt:"深圳"},{key:"04",txt:"香港"}]}
+    	]'
+	/>
+</view>
+<view title="表格示例">
+	<listview context="detail" id="list"
+		data-titles='["field","姓名","性别"]'>
+	</listview>
+</view>
+
+
+<command type="success" text="递交"/>
+<command text="取消"  type="gray"/>
+<command name="sure" text="确认"  size="big" type="success"/>
+<command text="确认"  size="big" type="darkgray" id="cancel"/>
+
+

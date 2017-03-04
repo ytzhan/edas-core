@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+<link rel="stylesheet" href="/css/mobiscroll.custom-3.0.0.min.css" />
+<link rel="stylesheet" href="/css/mzui.css" />
+<title>canjs demo</title>
+</head>
+<body>
+<script id="tpl" type="text/template">
+<titlebar title="我的首页">
+</titlebar>
+<div id="page"></div>
+</script>
+<script id="index" type="text/template">
+	<scrollview name="scollView">
+		{{#each data}}
+			<listitem index = {{@index}}>
+			<view title="条目{{@index}}">
+				<readtext label="测试标题" name="a"/>
+				<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
+			</view>
+			</listitem>
+		{{/each}}
+	</scrollview>
+</script>
+<script type="text/javascript" src="/tpframework.js"></script>
+<script>
+	options={
+		onShow:function(){
+			switchPage("policy/index");
+		},
+		onLaungh:function(){
+			this.setTemplate($("#tpl").html());
+			Pages.push(_Page({
+				template:$("#index").html(),
+				name:"policy/index",
+				onData:function(){
+					return []
+				},
+				onScollViewClick:function(pageNum){
+					return #remote("index/nextPage").post(pageNum)#end
+				},
+				onScollViewData:function(){
+					return #remote("index/firstPage").post({})#end
+				}
+			}));
+		}
+	};
+</script>
+</body>
+</html>

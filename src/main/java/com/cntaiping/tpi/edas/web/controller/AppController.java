@@ -2,6 +2,7 @@ package com.cntaiping.tpi.edas.web.controller;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,7 +55,6 @@ public class AppController {
 	@ResponseBody
 	public Object postPageAction(@PathVariable String module, @PathVariable String app, @PathVariable String scene, @PathVariable String page,
 			 @PathVariable String command, @RequestBody String json) throws IOException {
-		System.out.println("run "+command);
 		ActionWrapper pa = actionDispatcher.get(module,app,scene,page);
 		return pa.execute(command, json);
 	}
@@ -65,7 +65,7 @@ public class AppController {
 			 @PathVariable String command) throws IOException {
 		System.out.println("run "+command);
 		ActionWrapper pa = actionDispatcher.get(module,app,scene,page);
-		return pa.execute(command, "");
+		return  pa.execute(command, "");
 	}
 	
 	@Autowired

@@ -112,7 +112,6 @@ public class ActionWrapper {
 						return method.invoke(action, jsonToObject(json,actionClazz));
 					else{
 						method = remoteMethods.get(command);
-						System.out.println(command+" : "+method);
 						if (method!=null){
 							Class c=remoteMethodParams.get(command);
 							if (c==NullClass.class)
