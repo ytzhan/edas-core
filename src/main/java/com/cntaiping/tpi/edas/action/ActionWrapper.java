@@ -28,7 +28,7 @@ public class ActionWrapper {
 		return defaultEntityMethod;
 	}
 
-	private PageAction action;
+	private Object action;
 	private Class<?> actionClazz;
 	private String actionName;
 
@@ -39,11 +39,11 @@ public class ActionWrapper {
 	private String defaultEntityMethodName=null;
 	private Method defaultEntityMethod=null;
 
-	public PageAction getAction() {
+	public Object getAction() {
 		return action;
 	}
 
-	public ActionWrapper(PageAction action) {
+	public ActionWrapper(Object action) {
 		Assert.notNull(action, "Action 不能为空");
 		this.action = action;
 		init();

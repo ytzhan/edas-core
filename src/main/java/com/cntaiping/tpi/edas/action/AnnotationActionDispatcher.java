@@ -18,15 +18,11 @@ public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactor
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		Map<String, PageAction> actions = beanFactory.getBeansOfType(PageAction.class);
-		for (PageAction action : actions.values()) {
-			if (action.getClass().getAnnotation(Action.class) != null) {
-				SceneDef scene = findScene(action.getClass().getPackage());
-				if (scene != null) {
-					scene.addAction(new ActionWrapper(action));
-				}
-			} else {
-				logger.warn("{}未指定注解@Action", action);
+		Map<String, Object> actions = beanFactory.getBeansWithAnnotation(Action.class);
+		for (Object action : actions.values()) {
+			SceneDef scene = findScene(action.getClass().getPackage());
+			if (scene != null) {
+				scene.addAction(new ActionWrapper(action));
 			}
 		}
 	}
