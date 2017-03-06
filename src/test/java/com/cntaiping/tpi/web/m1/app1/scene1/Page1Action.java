@@ -12,7 +12,7 @@ import com.cntaiping.tpi.edas.annotation.RemoteFunction;
 import com.cntaiping.tpi.edas.demo.dto.UserDto;
 
 
-@Action(value="page1",entity=UserDto.class)
+@Action(page="page1",entity=UserDto.class)
 public class Page1Action extends PageAction{
 	@EntityEvent(name="onCmdClick")
 	public Object action1(UserDto entity){

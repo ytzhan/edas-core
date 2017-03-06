@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface Action {
-	public String value();
+	public String page();
 	public Class<?> entity();
 }

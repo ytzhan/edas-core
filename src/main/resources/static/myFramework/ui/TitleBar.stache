@@ -1,0 +1,13 @@
+<header class="heading {{position}} dock-top primary">
+	{{#if left_button}}
+      <nav class="nav backnav" id="back">
+        <a><i class="icon-chevron-left"></i></a>
+      </nav>
+    {{/if}}
+    <div class="title text-center">{{title}}</div>
+    {{#if menu_button}}
+      <nav class="nav menunav" id="menu">
+        <a><i class="icon-ellipsis-h"></i></a>
+      </nav>
+  	{{/if}}
+</header>

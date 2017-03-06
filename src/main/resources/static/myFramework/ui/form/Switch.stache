@@ -1,0 +1,9 @@
+<div class="row has-padding no-margin divider flex space-between relative" style="{{_hidden}} !important">
+	<label class="cell-6">{{label}}</label>
+	<input id="sw" {{switchboxValue}} class="switch" type="checkbox" name={{name}}>
+	{{#if error.flag}}
+		<div class="errorText">
+		{{error.message}}
+		</div>
+	{{/if}}
+</div>

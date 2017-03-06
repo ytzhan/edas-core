@@ -1,0 +1,19 @@
+<div class="heading  ">
+
+	<div class="title" >
+
+		<input {{inputValue}} type="text" style="text-align:{{align}} !important" placeholder={{tip}} class="text-gray search-input" name={{name}}>
+
+	</div>
+
+	<div class="nav">
+
+		<a><i class="icon-search"></i></a>
+
+	</div>
+	{{#if error.flag}}
+		<div class="errorText" style="left:0.5rem !important">
+		{{error.message}}
+		</div>
+	{{/if}}
+</div>

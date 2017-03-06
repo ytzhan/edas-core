@@ -10,7 +10,7 @@ import com.cntaiping.tpi.edas.annotation.RemoteFunction;
 import com.cntaiping.tpi.web.m1.app2.policy.dto.Student;
 
 
-@Action(value="detail",entity=Student.class)
+@Action(page="detail",entity=Student.class)
 public class DetailAction extends PageAction{
 	@RemoteFunction(name="find",param=String.class)
 	public Student defaultEntity(String id){

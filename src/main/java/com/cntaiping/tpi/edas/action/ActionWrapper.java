@@ -52,8 +52,8 @@ public class ActionWrapper {
 	public void init() {
 		//this.actionClazz = action.getClass();
 		Action annotation = action.getClass().getAnnotation(Action.class);
-		if (annotation != null && !StringUtils.isEmpty(annotation.value())) {
-			this.actionName = annotation.value();
+		if (annotation != null && !StringUtils.isEmpty(annotation.page())) {
+			this.actionName = annotation.page();
 			this.actionClazz=annotation.entity();
 		} else {
 			String clazzName = actionClazz.getSimpleName();

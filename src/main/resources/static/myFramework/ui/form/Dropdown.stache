@@ -1,0 +1,14 @@
+<div class="row has-padding select divider no-margin" style="{{_hidden}} !important">
+	<span class="cell-4">{{label}}</span>
+	{{#if selection}}
+			<select  {{selectValue}} class="cell-8 no-border" style="direction: {{_align}};">
+				{{#each selection}}
+					<option value="{{.}}" >{{@key}}</options>
+				{{/each}}
+			</select>
+		{{else}}
+			<select  class="cell-8 no-border" >
+				<option >Loading text</options>
+			</select>
+	{{/if}}
+</div>

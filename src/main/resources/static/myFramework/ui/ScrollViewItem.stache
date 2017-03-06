@@ -1,0 +1,12 @@
+
+{{#each data}}
+	<div class="relative" >
+		<text id="dvf" name="field1" label="姓名" align="right"/>
+		{{#if error.flag}}
+			<div class="errorText">
+			{{error.message}}
+			</div>
+		{{/if}}
+	</div>
+{{/each}}
+

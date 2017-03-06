@@ -13,7 +13,7 @@ import com.cntaiping.tpi.edas.annotation.RemoteFunction;
 import com.cntaiping.tpi.edas.demo.dto.UserDto;
 
 
-@Action(value="index",entity=UserDto.class)
+@Action(page="index",entity=UserDto.class)
 public class Page1Action2 extends PageAction{
 	@RemoteFunction(name = "firstPage", param = NullClass.class)
 	public Object firstPage(){
