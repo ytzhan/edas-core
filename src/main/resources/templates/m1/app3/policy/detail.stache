@@ -42,23 +42,20 @@
 
 <view title="下拉选择示例" 	>		
 	<dropdown  name="citys" id="citys" label="城市选择控件" align="right"
-		 data-selection='{深圳:"sz" ,珠海:"zh"}'/>
+		 data-selection='[{key:"深圳",value:"sz"} ,{key:"珠海",value:"zh"}]'/>
 	<dropdown  label="城市选择控件" name="area" id="area" align="right"
 		data-parent="citys" data-selection='{
-			zh:{香洲:"xz",金湾:"jw"},
-   	 		sz:{南山:"ns",福田:"ft",罗湖:"lh"}
+			zh:[{key:"香洲",value:"xz"},{key:"金湾",value:"jw"}],
+   	 		sz:[{key:"南山",value:"ns"},{key:"福田",value:"ft"},{key:"罗湖",value:"lh"}]
        	}' />
 </view>
 
 
 <view title="下拉选择示例" 	>	
 	<dropdown_mobi  label="城市选择" name="chose1"  id="new"
-		data-selection='{深圳:"sz" ,珠海:"zh"}'/>
+		data-selection='[{key:"深圳",value:"sz"} ,{key:"珠海",value:"zh"}]'/>
 	<dropdown_mobi  label="城市选择" name="chose2"  id="chose2" 
-		data-parent="chose1" data-selection='{
-			zh:{香洲:"xz",金湾:"jw"},
-   	 		sz:{南山:"ns",福田:"ft",罗湖:"lh"}
-       	}' />
+		data-parent="chose1" data-selection='page.chose123' />
 </view>
 
 <view title="grounp option示例" >	
