@@ -24,6 +24,8 @@
 		<edas-tp.version>1.0</edas-tp.version>
 		<hessian.version>4.0.38</hessian.version>
 		<commons-codec.version>1.10</commons-codec.version>
+		<commons-beanutils.version>1.9.3</commons-beanutils.version>
+		<commons-validator.version>1.6</commons-validator.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -83,6 +85,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${commons-validator.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

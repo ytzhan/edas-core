@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ActionWrapper {
 	private Logger logger = LoggerFactory.getLogger(getClass());
-			
+
 	public String getDefaultEntityMethodName() {
 		return defaultEntityMethodName;
 	}
@@ -36,8 +36,8 @@ public class ActionWrapper {
 	private Map<String, Method> remoteMethods = new HashMap<String, Method>();
 	private Map<String, Class<?>> remoteMethodParams = new HashMap<String, Class<?>>();
 	private Map<String, Method> entityMethods = new HashMap<String, Method>();
-	private String defaultEntityMethodName=null;
-	private Method defaultEntityMethod=null;
+	private String defaultEntityMethodName = null;
+	private Method defaultEntityMethod = null;
 
 	public PageAction getAction() {
 		return action;
@@ -50,52 +50,43 @@ public class ActionWrapper {
 	}
 
 	public void init() {
-		//this.actionClazz = action.getClass();
+		// this.actionClazz = action.getClass();
 		Action annotation = action.getClass().getAnnotation(Action.class);
-		if (annotation != null && !StringUtils.isEmpty(annotation.value())) {
-			this.actionName = annotation.value();
-			this.actionClazz=annotation.entity();
-		} else {
-			String clazzName = actionClazz.getSimpleName();
-			if (clazzName.endsWith("Action")) {
-				clazzName = clazzName.substring(0, clazzName.length() - 6);
-			}
-			this.actionName = clazzName.substring(0, 1).toLowerCase() + clazzName.substring(1);
-		}
-
+		this.actionName = annotation.value();
+		this.actionClazz = annotation.entity();
 		for (Method method : action.getClass().getMethods()) {
 			if (method.getAnnotation(EntityEvent.class) != null) {
-				EntityEvent ee=method.getAnnotation(EntityEvent.class);
+				EntityEvent ee = method.getAnnotation(EntityEvent.class);
 				entityEvents.put(ee.name(), method);
-			}else if (method.getAnnotation(RemoteFunction.class) != null){
-				RemoteFunction rf=method.getAnnotation(RemoteFunction.class);
+			} else if (method.getAnnotation(RemoteFunction.class) != null) {
+				RemoteFunction rf = method.getAnnotation(RemoteFunction.class);
 				remoteMethods.put(rf.name(), method);
 				remoteMethodParams.put(rf.name(), rf.param());
-			}else if (method.getAnnotation(EntityFunction.class) != null){
-				EntityFunction ef=method.getAnnotation(EntityFunction.class);
-				if (ef.param()==NullClass.class){
-					defaultEntityMethodName=ef.name();
-					defaultEntityMethod=method;
-				}else{
+			} else if (method.getAnnotation(EntityFunction.class) != null) {
+				EntityFunction ef = method.getAnnotation(EntityFunction.class);
+				if (ef.param() == NullClass.class) {
+					defaultEntityMethodName = ef.name();
+					defaultEntityMethod = method;
+				} else {
 					remoteMethods.put(ef.name(), method);
 					remoteMethodParams.put(ef.name(), actionClazz);
 				}
 			}
 
 		}
-		
-		objectMapper=new ObjectMapper();
+
+		objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
-	
+
 	private ObjectMapper objectMapper;
-	
-	private Object jsonToObject(String json,Class<?> clazz){
-		try{
+
+	private Object jsonToObject(String json, Class<?> clazz) {
+		try {
 			return objectMapper.readValue(json, clazz);
-		}catch (Exception ex){
-			logger.error("序列化{}为{}错误", json,clazz, ex);
-			throw new RuntimeException("序列化\n\t"+ json +"\n为"+clazz.getName()+" 错误！");
+		} catch (Exception ex) {
+			logger.error("序列化{}为{}错误", json, clazz, ex);
+			throw new RuntimeException("序列化\n\t" + json + "\n为" + clazz.getName() + " 错误！");
 		}
 	}
 
@@ -103,56 +94,57 @@ public class ActionWrapper {
 		try {
 			if (command.equalsIgnoreCase(defaultEntityMethodName))
 				return defaultEntityMethod.invoke(action);
-			else{
+			else {
 				Method method = entityEvents.get(command);
-				if (method!=null)
-					return method.invoke(action, jsonToObject(json,actionClazz));
-				else{
+				if (method != null)
+					return method.invoke(action, jsonToObject(json, actionClazz));
+				else {
 					method = entityMethods.get(command);
-					if (method!=null)
-						return method.invoke(action, jsonToObject(json,actionClazz));
-					else{
+					if (method != null)
+						return method.invoke(action, jsonToObject(json, actionClazz));
+					else {
 						method = remoteMethods.get(command);
-						if (method!=null){
-							Class c=remoteMethodParams.get(command);
-							if (c==NullClass.class)
+						if (method != null) {
+							Class<?> c = remoteMethodParams.get(command);
+							if (c == NullClass.class)
 								return method.invoke(action);
 							else
-								return method.invoke(action, jsonToObject(json,remoteMethodParams.get(command)));
+								return method.invoke(action, jsonToObject(json, remoteMethodParams.get(command)));
 						}
 					}
 				}
 			}
-			throw new RuntimeException(action.getClass().getName()+"没有实现"+command+"方法");
+			throw new RuntimeException(action.getClass().getName() + "没有实现" + command + "方法");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(action.getClass().getName() + " method " + command + " execute error!");
 		}
 	}
-	
-	public Object defaultEntity(){
+
+	public Object defaultEntity() {
 		try {
-			if (defaultEntityMethod!=null)	
+			if (defaultEntityMethod != null)
 				return defaultEntityMethod.invoke(action);
-			else{
-				Object obj=actionClazz.newInstance();
+			else {
+				Object obj = actionClazz.newInstance();
 				return obj;
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(action.getClass().getName() + " method " + defaultEntityMethodName + " execute error!");
+			throw new RuntimeException(
+					action.getClass().getName() + " method " + defaultEntityMethodName + " execute error!");
 		}
 	}
-	
-	public String[] getEntityEvents(){
+
+	public String[] getEntityEvents() {
 		return entityEvents.keySet().toArray(new String[0]);
 	}
-	
-	public String[] getEntityMethods(){
+
+	public String[] getEntityMethods() {
 		return entityMethods.keySet().toArray(new String[0]);
 	}
-	
-	public String[] getRemoteMethods(){
+
+	public String[] getRemoteMethods() {
 		return remoteMethods.keySet().toArray(new String[0]);
 	}
 

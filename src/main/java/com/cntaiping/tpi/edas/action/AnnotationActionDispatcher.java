@@ -9,6 +9,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
+import com.cntaiping.tpi.edas.annotation.Action;
 import com.cntaiping.tpi.edas.util.WebUtil;
 
 public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactoryPostProcessor {
@@ -19,9 +20,13 @@ public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactor
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		Map<String, PageAction> actions = beanFactory.getBeansOfType(PageAction.class);
 		for (PageAction action : actions.values()) {
-			SceneDef scene = findScene(action.getClass().getPackage());
-			if(scene != null){
-				scene.addAction(new ActionWrapper(action));
+			if (action.getClass().getAnnotation(Action.class) != null) {
+				SceneDef scene = findScene(action.getClass().getPackage());
+				if (scene != null) {
+					scene.addAction(new ActionWrapper(action));
+				}
+			} else {
+				logger.warn("{}未指定注解@Action", action);
 			}
 		}
 	}
@@ -46,9 +51,9 @@ public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactor
 	}
 
 	@Override
-	public ActionWrapper get(String module,String app,String scene,String action) {
-		SceneDef sceneDef = scenes.get(module+"."+app+"."+scene);
-		if(sceneDef != null)
+	public ActionWrapper get(String module, String app, String scene, String action) {
+		SceneDef sceneDef = scenes.get(module + "." + app + "." + scene);
+		if (sceneDef != null)
 			return sceneDef.getAction(action);
 		return null;
 	}

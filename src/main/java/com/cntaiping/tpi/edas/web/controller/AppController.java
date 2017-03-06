@@ -21,13 +21,12 @@ import com.cntaiping.tpi.edas.util.WebUtil;
 @Controller
 @RequestMapping("/gw/{module}/{app}/{scene}")
 public class AppController {
-	public static final String APP_HOMEPAGE = "/{0}/{1}/{2}";
-	public static final String APP_HOME = "/{0}/{1}/{2}/{3}";
+	public static final String APP_HOMEPAGE = "/{0}/{1}/{2}/{3}";
 	public static final String PAGE_PATH = "/{0}/{1}/{2}/{3}";
 
 	@RequestMapping(value="/home",method=RequestMethod.GET)
 	public ModelAndView home(@PathVariable String module, @PathVariable String app, @PathVariable String scene) {
-		String view = MessageFormat.format(APP_HOMEPAGE, module, app,  "index.html");
+		String view = MessageFormat.format(APP_HOMEPAGE, module, app,scene,  "index.html");
 		ModelAndView mav = new ModelAndView(view);
 		return mav;
 	}
