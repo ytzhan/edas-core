@@ -39,7 +39,6 @@ public class Options extends PageActionDirective {
 					writer.write(",");
 				Object obj=pa.getCodeDataHelper(names[i]).list();
 				String json=objectMapper.writeValueAsString(obj);
-				System.out.println(json+"\n");
 				writer.write(names[i]+":"+json);
 			}
 			writer.write("}");
