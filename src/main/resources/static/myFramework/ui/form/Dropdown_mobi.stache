@@ -3,7 +3,7 @@
 	{{#if selection}}
 			<select  {{selectValue}} class="cell-8 no-border" >
 				{{#each selection}}
-					<option value="{{value}}" >{{key}}</options>
+					<option value="{{value}}" >{{label}}</options>
 				{{/each}}
 			</select>
 		{{else}}

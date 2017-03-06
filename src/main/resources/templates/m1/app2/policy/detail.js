@@ -6,8 +6,8 @@ Page({
 	onBackClick:function(){
 		switchPage("policy/index");
 	},
-	chose123:{
-		zh:[{key:"香洲",value:"xz"},{key:"金湾",value:"jw"}],
-	 		sz:[{key:"南山",value:"ns"},{key:"福田",value:"ft"},{key:"罗湖",value:"lh"}]
-   	}
+	codeTable:{
+		citys:{zh:[{label:"香洲",value:"xz"},{label:"金湾",value:"jw"}],
+	 		sz:[{label:"南山",value:"ns"},{label:"福田",value:"ft"},{label:"罗湖",value:"lh"}]}
+   	},
 });
