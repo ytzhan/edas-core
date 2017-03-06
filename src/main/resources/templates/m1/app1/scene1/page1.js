@@ -9,6 +9,6 @@ Page({
 			alert("Ok");
 		});#end
 	},
-	citys:#remote("page1/rpc").get()#end
-	
+	citys:#remote("page1/rpc").get()#end,
+	city2:#options("rpc")
 });

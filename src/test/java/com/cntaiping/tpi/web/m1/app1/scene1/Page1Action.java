@@ -13,7 +13,7 @@ import com.cntaiping.tpi.edas.demo.dto.UserDto;
 
 
 @Action(value="page1",entity=UserDto.class)
-public class Page1Action implements PageAction{
+public class Page1Action extends PageAction{
 	@EntityEvent(name="onCmdClick")
 	public Object action1(UserDto entity){
 		Map result=new HashMap();
