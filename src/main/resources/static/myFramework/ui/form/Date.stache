@@ -1,0 +1,16 @@
+<div class=" row divider has-padding no-margin relative" style="{{_hidden}} !important">
+
+	<label class="cell-4">{{label}}</label>
+
+	<input {{inputValue}} class="cell no-border date " type="text" name={{name}} 
+
+	placeholder={{tip}} start={{start}} end ={{end}} style="text-align:{{align}} !important">
+
+	<i class="icon icon-calendar"></i>
+	{{#if error.flag}}
+		<div class="errorText">
+		{{error.message}}
+		</div>
+	{{/if}}
+
+</div>

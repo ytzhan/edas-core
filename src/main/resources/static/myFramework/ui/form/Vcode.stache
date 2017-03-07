@@ -1,0 +1,19 @@
+<div class=" row  no-margin pl5 divider relative"  style="{{_hidden}} !important">
+
+	<label class="cell-4">{{label}}</label>
+
+	<input {{inputValue}} class="cell-4 no-border" type="text" name={{name}} placeholder={{tip}} style="text-align:{{align}} !important">
+
+	<span class="cell-4 bl flex flex-center no-padding">
+		{{#src}}
+			<img  class="fluid no-margin"  src={{src}} style="height:46px">
+			{{else}}
+			<a href="javascript:;" class="getvcode">{{text}}</a>
+		{{/src}}
+	</span>
+	{{#if error.flag}}
+		<div class="errorText">
+		{{error.message}}
+		</div>
+	{{/if}}
+</div>

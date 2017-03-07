@@ -11,13 +11,14 @@ import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
 import com.cntaiping.tpi.edas.action.ActionWrapper;
+import com.cntaiping.tpi.edas.action.PageAction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Options extends PageActionDirective {
 	private ObjectMapper objectMapper=new ObjectMapper();
 	@Override
 	public String getName() {
-		return "options";
+		return "codeTable";
 	}
 
 	@Override
@@ -28,14 +29,21 @@ public class Options extends PageActionDirective {
 	@Override
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
-		int count=node.jjtGetNumChildren();
-		if (count>0){
-			String command=(String)node.jjtGetChild(0).value(context);
-			System.out.println(command);
-			ActionWrapper actionWrapper=getActionWrapper(context);
-			writer.write(objectMapper.writeValueAsString(actionWrapper._execute(command, null)));
+		ActionWrapper aw=getActionWrapper(context);
+		PageAction pa=(PageAction)aw.getAction();
+		String[] names=pa.getCodeDataHelper();
+		if (names.length>0){
+			writer.write("codeTable:{");
+			for (int i=0;i<names.length;i++){
+				if (i>0)
+					writer.write(",");
+				Object obj=pa.getCodeDataHelper(names[i]).list();
+				String json=objectMapper.writeValueAsString(obj);
+				writer.write(names[i]+":"+json);
+			}
+			writer.write("}");
 		}else
-			writer.write("[]");
+			writer.write("codeTable:{}");
 		return false;
 	}
 

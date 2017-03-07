@@ -1,0 +1,15 @@
+<div class="row has-padding mobi-input {{_align}} divider select no-margin" style="{{_hidden}} !important">
+	<span class="cell-4">{{label}}</span>
+	{{#if selection}}
+			<select  {{selectValue}} class="cell-8 no-border" >
+				{{#each selection}}
+					<option value="{{value}}" >{{label}}</options>
+				{{/each}}
+			</select>
+		{{else}}
+			<select  class="cell-8 no-border" >
+				<option >Loading text</options>
+			</select>
+	{{/if}}
+</div>
+

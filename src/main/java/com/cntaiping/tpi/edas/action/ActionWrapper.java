@@ -57,7 +57,7 @@ public class ActionWrapper {
 
 	public void init() {
 		Action annotation = action.getClass().getAnnotation(Action.class);
-		this.actionName = annotation.value();
+		this.actionName = annotation.page();
 		this.entityClazz = annotation.entity();
 		try {
 			this.validator = annotation.validator().newInstance();

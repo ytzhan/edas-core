@@ -1,0 +1,17 @@
+<table class="table bordered" style="text-align:{{align}} !important;{{_hidden}} !important">
+		<tr class="primary">
+			{{#each titles}}
+				<td>{{.}}</td>
+			{{/each}}
+		</tr>
+		<tbody>
+		{{#each data}}
+			<tr id="{{@index}}">
+				{{#each . }}
+					<td>{{.}}</td>
+				{{/each}}
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+

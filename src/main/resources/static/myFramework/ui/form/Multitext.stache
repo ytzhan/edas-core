@@ -1,0 +1,10 @@
+<div class="row has-padding no-margin relative" style="{{_hidden}} !important">
+
+	<textarea {{inputValue}} class="no-border fluid" placeholder={{tip}} name={{name}} rows={{row}} style="text-align:{{align}} !important"></textarea>
+
+	{{#if error.flag}}
+		<div class="errorText" style="left:0.5rem !important">
+		{{error.message}}
+		</div>
+	{{/if}}
+</div>

@@ -1,0 +1,12 @@
+{
+	pages : [],
+	imports : [
+			"myFramework/ui/TitleBar","myFramework/ui/TabBar","myFramework/ui/View",
+			"myFramework/ui/form/Checkbox",	"myFramework/ui/form/Command",	"myFramework/ui/form/Date",	
+			"myFramework/ui/form/Dropdown",	"myFramework/ui/form/Groupopt","myFramework/ui/form/Multitext",
+			"myFramework/ui/form/Radio","myFramework/ui/form/Search","myFramework/ui/form/Switch",
+			"myFramework/ui/form/Text",	"myFramework/ui/form/Vcode","myFramework/ui/form/Dropdown_mobi",
+			"myFramework/ui/ScrollView","myFramework/ui/ScrollViewItem","myFramework/ui/ListView",
+			,"myFramework/ui/ListItemWidget","myFramework/ui/form/Readtext","myFramework/ui/Link"
+			]
+}

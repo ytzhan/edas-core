@@ -1,0 +1,10 @@
+<div class="layer affix dock-{{position}}" style="min-width: 10rem">
+  <div id="menu" class="list with-divider">
+    {{#each list}}
+    <a class="item" data-menuid={{@index}}>
+    	{{#if icon}}<i class="muted {{icon}}"></i>{{/if}}
+    	{{text}}
+    </a>
+    {{/each}}
+  </div>
+</div>

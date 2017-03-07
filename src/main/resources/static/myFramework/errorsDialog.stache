@@ -1,0 +1,14 @@
+<div class="page  errorDialogMask" style="overflow: hidden" id="errorDialog">
+	<div class="flex errorDialogText bt bb"><span class="width50 bl br" style="padding-left:5px">属性名</span><span class="width50  br" style="padding-left:5px">错误提示</span></div>
+	{{#each data}}
+		{{#each . }}
+		<div class="flex errorDialogText  bb ">
+			<span class="width50 bl br" style="padding-left:5px">{{@key}}</span>
+			<span class="width50  br" style="padding-left:5px">
+				 {{.}} 
+			</span>
+		</div>
+		{{/each}}
+	{{/each}}
+	<command id="sure" text="确认"  size="big" type="success"/>
+</div>

@@ -14,7 +14,7 @@
 </titlebar>
 <div id="page"></div>
 </script>
-<script id="index" type="text/template">
+<!--<script id="index" type="text/template">
 	<scrollview name="scollView">
 		{{#each data}}
 			<listitem index = {{@index}}>
@@ -25,8 +25,28 @@
 			</listitem>
 		{{/each}}
 	</scrollview>
+</script>-->
+<script id="index" type="text/template">
+	<scrollview name="scollView">
+		{{#each data}}
+			<listitem index = {{@index}}>
+				<div class="item-style1">
+					<img src="/pic/tp.png">
+					<div class="item-style1-cell">
+						<span class="item-title">太平财险（{{@index}}）</span>
+						<span class="item-content">元宵节这么浪漫你知道吗？</span>
+					</div>
+				</div>
+				<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
+			</listitem>
+		{{/each}}
+	</scrollview>
 </script>
+
+<!-- 
 <script type="text/javascript" src="/tpframework.js"></script>
+ -->
+<script type="text/javascript" src="/requirejs/require.js" data-main="/framework/index.js"></script>
 <script>
 	options={
 		onShow:function(){

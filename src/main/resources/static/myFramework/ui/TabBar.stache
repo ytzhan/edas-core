@@ -1,0 +1,7 @@
+{{#if visible}}
+<nav class="nav affix dock-bottom justified">
+  {{#each tabs}}
+  <a data-url={{page}}>{{text}}</a>
+  {{/each}}
+</nav>
+{{/if}}

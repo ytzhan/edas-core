@@ -14,7 +14,7 @@ import com.cntaiping.tpi.edas.action.EntityValidator;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface Action {
-	public String value();
+	public String page();
 	public Class<?> entity();
 	public Class<? extends EntityValidator> validator() default EmptyEntityValidator.class;
 }
