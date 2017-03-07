@@ -2,7 +2,7 @@ package com.cntaiping.tpi.edas.action.validator.impl;
 
 import java.math.BigDecimal;
 
-import com.cntaiping.tpi.edas.action.validator.Errors;
+import com.cntaiping.tpi.edas.action.Result;
 import com.cntaiping.tpi.edas.action.validator.IValidator;
 import com.cntaiping.tpi.edas.web.BaseRuntimeException;
 
@@ -20,7 +20,7 @@ public class NumberRangeValidator implements IValidator {
 	}
 
 	@Override
-	public void validate(String route, Object data, Errors error) {
+	public void validate(String route, Object data, Result error) {
 		BigDecimal value = new BigDecimal(String.valueOf(data));
 		if (value.compareTo(min) < 0 || value.compareTo(max) > 0) {
 			error.rejectFieldError(route, value + " 不在区间【" + min + "-" + max + "]内");

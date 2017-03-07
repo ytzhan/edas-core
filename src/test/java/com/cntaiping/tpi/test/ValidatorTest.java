@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.cntaiping.tpi.edas.action.validator.Errors;
+import com.cntaiping.tpi.edas.action.Result;
 import com.cntaiping.tpi.edas.action.validator.ValidatorFactory;
 
 public class ValidatorTest {
@@ -23,7 +23,8 @@ public class ValidatorTest {
 		
 		UserValidator tv = new UserValidator();
 		tv.init(vf);
-		Errors  error = tv.valid(user);
-		System.out.println(error);
+		Result result = new Result();
+		tv.valid(user,result);
+		System.out.println(result);
 	}
 }

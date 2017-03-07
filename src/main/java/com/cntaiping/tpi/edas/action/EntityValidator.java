@@ -3,7 +3,6 @@ package com.cntaiping.tpi.edas.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.cntaiping.tpi.edas.action.validator.Errors;
 import com.cntaiping.tpi.edas.action.validator.ValidatorDef;
 import com.cntaiping.tpi.edas.action.validator.ValidatorFactory;
 
@@ -28,8 +27,7 @@ public abstract class EntityValidator<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Errors valid(Object target) {
-		Errors errors = new Errors();
+	public Result valid(Object target,Result errors) {
 		for (ValidatorDef def : validatorDefs.values()) {
 			def.validate(target, errors);
 		}
@@ -37,6 +35,6 @@ public abstract class EntityValidator<T> {
 		return errors;
 	}
 
-	public void customValid(T target, Errors errors) {
+	public void customValid(T target, Result errors) {
 	}
 }

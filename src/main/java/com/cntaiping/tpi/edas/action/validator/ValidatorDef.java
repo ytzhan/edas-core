@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
+import com.cntaiping.tpi.edas.action.Result;
 import com.cntaiping.tpi.edas.web.BaseRuntimeException;
 
 public class ValidatorDef {
@@ -43,12 +44,12 @@ public class ValidatorDef {
 		}
 	}
 	
-	public void validate(Object data, Errors error) {
+	public void validate(Object data, Result error) {
 		validateObject(0, data, "", error);
 
 	}
 
-	protected void validateList(int stepIdx, List<?> list, String parent, Errors error) {
+	protected void validateList(int stepIdx, List<?> list, String parent, Result error) {
 		for(int i =0;i<list.size();i++){
 			Object stepData = list.get(i);
 			String curRoute =parent+"["+i+"]";
@@ -56,7 +57,7 @@ public class ValidatorDef {
 		}
 	}
 
-	protected void validateObject(int stepIdx, Object data, String parent, Errors error) {
+	protected void validateObject(int stepIdx, Object data, String parent, Result error) {
 		String step = steps[stepIdx];
 		Object stepData = null;
 		try {
@@ -68,7 +69,7 @@ public class ValidatorDef {
 		validElement(stepIdx, error, stepData, curRoute);
 	}
 
-	private void validElement(int stepIdx, Errors error, Object stepData, String curRoute) {
+	private void validElement(int stepIdx, Result error, Object stepData, String curRoute) {
 		if (stepData != null) {
 			if (stepData instanceof List) {
 				validateList(stepIdx, (List<?>) stepData, curRoute, error);
@@ -82,7 +83,7 @@ public class ValidatorDef {
 		}
 	}
 
-	protected  void validateMetaData(String route, Object data,Errors error){
+	protected  void validateMetaData(String route, Object data,Result error){
 		for(IValidator ins:insList){
 			ins.validate(route, data, error);
 		}

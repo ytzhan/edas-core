@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import com.cntaiping.tpi.edas.action.validator.Errors;
+import com.cntaiping.tpi.edas.action.Result.STATUS;
 import com.cntaiping.tpi.edas.action.validator.ValidatorFactory;
 import com.cntaiping.tpi.edas.annotation.Action;
 import com.cntaiping.tpi.edas.annotation.EntityEvent;
@@ -32,7 +32,7 @@ public class ActionWrapper {
 
 	private Object action;
 	private Class<?> entityClazz;
-	private EntityValidator validator;
+	private EntityValidator<?> validator;
 	private String actionName;
 
 	private Map<String, Method> entityEvents = new HashMap<String, Method>();
@@ -93,13 +93,7 @@ public class ActionWrapper {
 
 	private Object jsonToObject(String json, Class<?> clazz) {
 		try {
-			Object obj = objectMapper.readValue(json, clazz);
-			Errors errors = this.validator.valid(obj);
-			if (errors.isSucc()) {
-				return obj;
-			} else {
-				throw new RuntimeException("校验失败:" + errors);
-			}
+			return objectMapper.readValue(json, clazz);
 
 		} catch (Exception ex) {
 			logger.error("序列化{}为{}错误", json, clazz, ex);
@@ -107,34 +101,39 @@ public class ActionWrapper {
 		}
 	}
 
-	public Object execute(String command, String json) {
+	public Result execute(String command, String json) {
+		Result result = new Result();
 		try {
 			if (command.equalsIgnoreCase(defaultEntityMethodName))
-				return defaultEntityMethod.invoke(action);
+				return result.attachData(defaultEntityMethod.invoke(action));
 			else {
 				Method method = entityEvents.get(command);
-				if (method != null)
-					return method.invoke(action, jsonToObject(json, entityClazz));
-				else {
+				if (method == null) {
 					method = entityMethods.get(command);
-					if (method != null)
-						return method.invoke(action, jsonToObject(json, entityClazz));
-					else {
-						method = remoteMethods.get(command);
-						if (method != null) {
-							Class c = remoteMethodParams.get(command);
-							if (c == NullClass.class)
-								return method.invoke(action);
-							else
-								return method.invoke(action, jsonToObject(json, remoteMethodParams.get(command)));
-						}
+				}
+				if (method != null) {
+					Object entity = jsonToObject(json, entityClazz);
+					this.validator.valid(entity,result);
+					if(result.hasErrors()){
+						return result.setStatus(STATUS.VALID_ERROR);
+					}
+					return result.attachData(method.invoke(action, entity));
+				} else {
+					method = remoteMethods.get(command);
+					if (method != null) {
+						Class<?> c = remoteMethodParams.get(command);
+						if (c == NullClass.class)
+							return result.attachData(method.invoke(action));
+						else
+							return result.attachData(method.invoke(action, jsonToObject(json, remoteMethodParams.get(command))));
 					}
 				}
 			}
-			throw new RuntimeException(action.getClass().getName() + "没有实现" + command + "方法");
+			return result.setStatus(STATUS.SYS_ERROR).rejectError("S001", action.getClass().getName() + "没有实现" + command + "方法");
+			//throw new RuntimeException(action.getClass().getName() + "没有实现" + command + "方法");
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(action.getClass().getName() + " method " + command + " execute error!");
+			logger.error(action.getClass().getName() + " method " + command + " execute error!", e);
+			return result.setStatus(STATUS.SYS_ERROR).rejectError("S002", e.getMessage());
 		}
 	}
 
@@ -154,7 +153,7 @@ public class ActionWrapper {
 						method = remoteMethods.get(command);
 						System.out.println(command + " : " + method);
 						if (method != null) {
-							Class c = remoteMethodParams.get(command);
+							Class<?> c = remoteMethodParams.get(command);
 							if (c == NullClass.class)
 								return method.invoke(action);
 							else
