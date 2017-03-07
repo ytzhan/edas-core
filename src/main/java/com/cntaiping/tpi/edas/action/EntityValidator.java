@@ -29,7 +29,9 @@ public abstract class EntityValidator {
 
 	public Errors valid(Object target) {
 		Errors errors = new Errors();
-
+		for(ValidatorDef def:validatorDefs.values()){
+			def.validate(target, errors);
+		}
 		return errors;
 	}
 

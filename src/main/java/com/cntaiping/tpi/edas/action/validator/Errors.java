@@ -3,10 +3,17 @@ package com.cntaiping.tpi.edas.action.validator;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Errors {
+	 static ObjectMapper mapper = new ObjectMapper();
+	static{
+		mapper.setSerializationInclusion(Include.NON_NULL); 
+	}
+	public Errors() {
+	}
 	public List<FieldError> errors = new ArrayList<FieldError>();
 
 	public List<FieldError> getErrors() {
@@ -25,7 +32,7 @@ public class Errors {
 	@Override
 	public String toString() {
 		try {
-			return new ObjectMapper().writeValueAsString(this);
+			return mapper.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
 			return "";
 		}

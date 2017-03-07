@@ -1,27 +1,18 @@
 package com.cntaiping.tpi.edas.action.validator;
 
 import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
-public class ValidatorFactory implements ApplicationContextAware, InitializingBean {
+public class ValidatorFactory implements InitializingBean {
 	Map<String, Class<?>> validatorClazzs = new HashMap<String, Class<?>>();
-
-	ApplicationContext applicationContext;
-
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
 
 	public Class<?> getValidatorClazz(String name) {
 		Class<?> clazz = validatorClazzs.get(name);
@@ -32,11 +23,13 @@ public class ValidatorFactory implements ApplicationContextAware, InitializingBe
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Properties prop = new Properties();
-		Resource[] ress = applicationContext.getResources("META-INF/resources/validator.properties");
-		for (Resource res : ress) {
+		Enumeration<URL> urls = this.getClass().getClassLoader()
+				.getResources("META-INF/resources/validator.properties");
+		while (urls.hasMoreElements()) {
+			URL url = urls.nextElement();
 			InputStream in = null;
 			try {
-				in = res.getInputStream();
+				in = url.openStream();
 				prop.load(in);
 			} catch (Exception e) {
 				if (in != null) {
