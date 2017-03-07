@@ -1,26 +1,48 @@
 package com.cntaiping.tpi.edas.action.validator;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
+import com.cntaiping.tpi.edas.web.BaseRuntimeException;
 
-public abstract class BaseValidator implements IValidator {
-	protected String path;
+public class ValidatorDef {
+	private String path;
 	protected String[] steps;
+	private List<ValidatorCfg> cfgs = new ArrayList<ValidatorCfg>(4);
+	private List<IValidator> insList = new ArrayList<IValidator>(4);
 
-	@Override
-	public void init(String path, Object[] args) {
+	public ValidatorDef(String path) {
 		this.path = path;
 		this.steps = path.split("\\.");
-		parseParam(args);
 	}
 
-	protected void parseParam(Object[] args) {
+	public String getPath() {
+		return path;
+	}
+	
+
+	public void addValidatorCfg(ValidatorFactory vf, String validatorName, Object... params) {
+		ValidatorCfg cfg = new ValidatorCfg(validatorName, params);
+		this.cfgs.add(cfg);
+		this.insList.add(build(vf, cfg));
 	}
 
-	@Override
+	public IValidator build(ValidatorFactory vf, ValidatorCfg cfg) {
+		Class<?> clazz = vf.getValidatorClazz(cfg.getValidatorName());
+		try {
+			IValidator ins = (IValidator) clazz.newInstance();
+			ins.init(cfg.params);
+			return ins;
+		} catch (InstantiationException e) {
+			throw new BaseRuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new BaseRuntimeException(e);
+		}
+	}
+	
 	public void validate(Object data, Errors error) {
 		validateObject(0, data, "", error);
 
@@ -60,6 +82,27 @@ public abstract class BaseValidator implements IValidator {
 		}
 	}
 
-	protected abstract void validateMetaData(String route, Object data,Errors error);
+	protected  void validateMetaData(String route, Object data,Errors error){
+		for(IValidator ins:insList){
+			ins.validate(route, data, error);
+		}
+	}
 
+	class ValidatorCfg {
+		private String validatorName;
+		private Object[] params;
+
+		public ValidatorCfg(String validatorName, Object... params) {
+			this.validatorName = validatorName;
+			this.params = params;
+		}
+
+		public String getValidatorName() {
+			return validatorName;
+		}
+
+		public Object[] getParams() {
+			return params;
+		}
+	}
 }
