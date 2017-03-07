@@ -1,0 +1,14 @@
+<div class="card2">
+<div class="card-style2">
+	<div class="card-title">{{title}}</div>
+	<div class="card-time">{{time}}</div>
+	{{#if img}}
+		<div class="card-img">
+			<img src="{{img}}" />
+		</div>
+	{{/if}}
+	<div class="card-detail">{{content}}</div>
+</div>
+	<content/>
+</div>
+	

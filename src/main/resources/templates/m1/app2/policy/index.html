@@ -14,47 +14,14 @@
 </titlebar>
 <div id="page"></div>
 </script>
-<!--<script id="index" type="text/template">
-	 <scrollview name="scollView">
-		{{#each data}}
-			<listitem index = {{@index}}>
-			<view title="条目{{@index}}">
-				<readtext label="测试标题" name="a"/>
-				<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
-			</view>
-			</listitem>
-		{{/each}}
-	</scrollview>
-</script>
+
 <script id="index" type="text/template">
 	<scrollview name="scollView">
 		{{#each data}}
 			<listitem 　index = {{@index}}  >
-				<div>
-					<div class="item-style1">
-						<img class="img " src="{{url}}">
-						<div class="item-style1-cell ">
-							<span class="item-title">{{title}}</span>
-							<span class="item-content">{{content}}</span>
-						</div>
-					</div>
-				</div>
-			</listitem>
-		{{/each}}
-	</scrollview>
-</script> -->
-<script id="index" type="text/template">
-	<scrollview name="scollView">
-		{{#each data}}
-			<listitem 　index = {{@index}}  >
-				<div class="item-style2">
-					<div class="item-title">{{title}}</div>
-					<div class="item-time">3月3</div>
-					<div class="item-img">
-						<img src="/pic/main.jpg" />
-					</div>
-					<div class="item-detail">{{content}}</div>
-				</div>
+				<cardstyle2 title={{title}}  img={{url}} time="3月3日" content={{content}}>
+					<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
+				</cardstyle1>
 			</listitem>
 		{{/each}}
 	</scrollview>

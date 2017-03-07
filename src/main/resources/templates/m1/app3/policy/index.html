@@ -12,32 +12,15 @@
 <script id="tpl" type="text/template">
 <titlebar title="我的首页">
 </titlebar>
-<div id="page"></div>
+<div id="page">	</div>
 </script>
-<!--<script id="index" type="text/template">
-	<scrollview name="scollView">
-		{{#each data}}
-			<listitem index = {{@index}}>
-			<view title="条目{{@index}}">
-				<readtext label="测试标题" name="a"/>
-				<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
-			</view>
-			</listitem>
-		{{/each}}
-	</scrollview>
-</script>-->
 <script id="index" type="text/template">
 	<scrollview name="scollView">
 		{{#each data}}
 			<listitem index = {{@index}}>
-				<div class="item-style1">
-					<img src="/pic/tp.png">
-					<div class="item-style1-cell">
-						<span class="item-title">太平财险（{{@index}}）</span>
-						<span class="item-content">元宵节这么浪漫你知道吗？</span>
-					</div>
-				</div>
-				<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
+				<cardstyle1 title="被奥斯卡遗落的明珠{{@index}}"  img="/pic/tp.png" time="3月3日" content="奥斯卡奖不是全部">
+					<linkpage text="详细信息" linkto="detail.stache?id={{a}}"/>
+				</cardstyle2>
 			</listitem>
 		{{/each}}
 	</scrollview>

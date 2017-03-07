@@ -7,6 +7,7 @@
 			"myFramework/ui/form/Radio","myFramework/ui/form/Search","myFramework/ui/form/Switch",
 			"myFramework/ui/form/Text",	"myFramework/ui/form/Vcode","myFramework/ui/form/Dropdown_mobi",
 			"myFramework/ui/ScrollView","myFramework/ui/ScrollViewItem","myFramework/ui/ListView",
-			,"myFramework/ui/ListItemWidget","myFramework/ui/form/Readtext","myFramework/ui/Link"
+			,"myFramework/ui/ListItemWidget","myFramework/ui/form/Readtext","myFramework/ui/Link",
+			"myFramework/ui/CardStyle1","myFramework/ui/CardStyle2"
 			]
 }

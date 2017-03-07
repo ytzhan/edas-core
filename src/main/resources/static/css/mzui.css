@@ -572,7 +572,6 @@ ol,
 blockquote,
 pre,
 table,
-img,
 video,
 iframe,
 object,
@@ -5180,12 +5179,12 @@ select+input{
 .item-style1{
     border-bottom: 1px solid #ececec;
     padding-left:15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background:#fff;
     display: flex;
     justify-content:flex-start;
-    align-item:center;
+    align-items:center;
 }
 .item-style1-cell{
     display: flex;
@@ -5207,47 +5206,61 @@ select+input{
 }
 
 .item-style1-cell>.item-content{
-    width: 90%;
     margin-top: 2px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-.item-style2{
-    margin-left: 8px;
+.card2{
+	border-radius: 5px;
+	background: #fff;
+	margin-left: 8px;
     margin-right: 8px;
+}
+.card-style2{
     margin-top: 20px;
-    border-radius: 5px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background: #fff;
     overflow: hidden;
+    border-bottom: 1px solid #ececec;
 }
-.item-style2>.item-title{
+.card-style2>.card-title{
     font-size: 14px;
     color: #000;
 }
-.item-style2>.item-time{
+.card-style2>.card-time{
     font-size: 12px;
     color: #999;
     margin-top: 5px;
 }
-.item-style2>.item-img{
+.card-style2>.card-img{
     margin-top: 5px;
     height: 140px;
     width: 100%;
 }
-.item-style2>.item-img>img{
+.card-style2>.card-img>img{
     height: 100%;
     width: 100%;
 }
-.item-style2>.item-detail{
+.card-style2>.card-detail{
     margin-top: 5px;
     color: #666;
     font-size: 12px;
     overflow: hidden;
     text-align: justify;
 }
-
+.link-page{
+	position: relative;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size:12px;
+}
+.link-page>.icon-chevron-right{
+	position: absolute;
+    right: 15px;
+}

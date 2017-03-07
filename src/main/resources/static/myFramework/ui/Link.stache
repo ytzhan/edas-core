@@ -1,6 +1,11 @@
 <div class="list">
-	<a class="item with-avatar">
-	    <div class="avatar circle"><img src="{{image}}" alt=""></div>
+	<a class="link-page">
+   
+    	{{#if image}}
+    	<div class="avatar circle">
+    		<img src="{{image}}" alt="">
+    	</div>
+    	{{/if}}
 	    <div class="title">{{text}}</div>
 	    <i class="icon icon-chevron-right muted"></i>
 	</a>
