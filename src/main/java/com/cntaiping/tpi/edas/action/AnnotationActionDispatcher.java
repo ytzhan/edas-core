@@ -9,6 +9,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
+import com.cntaiping.tpi.edas.action.validator.ValidatorFactory;
 import com.cntaiping.tpi.edas.annotation.Action;
 import com.cntaiping.tpi.edas.util.WebUtil;
 
@@ -18,11 +19,12 @@ public class AnnotationActionDispatcher implements IActionDispatcher, BeanFactor
 
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		ValidatorFactory vf = beanFactory.getBean(ValidatorFactory.class);
 		Map<String, Object> actions = beanFactory.getBeansWithAnnotation(Action.class);
 		for (Object action : actions.values()) {
 			SceneDef scene = findScene(action.getClass().getPackage());
 			if (scene != null) {
-				scene.addAction(new ActionWrapper(action));
+				scene.addAction(new ActionWrapper(action,vf));
 			}
 		}
 	}

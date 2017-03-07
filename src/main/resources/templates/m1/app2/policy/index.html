@@ -15,7 +15,7 @@
 <div id="page"></div>
 </script>
 <!--<script id="index" type="text/template">
-	<scrollview name="scollView">
+	 <scrollview name="scollView">
 		{{#each data}}
 			<listitem index = {{@index}}>
 			<view title="条目{{@index}}">
@@ -25,23 +25,40 @@
 			</listitem>
 		{{/each}}
 	</scrollview>
-</script>-->
+</script>
 <script id="index" type="text/template">
 	<scrollview name="scollView">
 		{{#each data}}
-			<listitem index = {{@index}}>
-				<div class="item-style1">
-					<img src="/pic/tp.png">
-					<div class="item-style1-cell">
-						<span class="item-title">太平财险（{{@index}}）</span>
-						<span class="item-content">元宵节这么浪漫你知道吗？</span>
+			<listitem 　index = {{@index}}  >
+				<div>
+					<div class="item-style1">
+						<img class="img " src="{{url}}">
+						<div class="item-style1-cell ">
+							<span class="item-title">{{title}}</span>
+							<span class="item-content">{{content}}</span>
+						</div>
 					</div>
 				</div>
 			</listitem>
 		{{/each}}
 	</scrollview>
+</script> -->
+<script id="index" type="text/template">
+	<scrollview name="scollView">
+		{{#each data}}
+			<listitem 　index = {{@index}}  >
+				<div class="item-style2">
+					<div class="item-title">{{title}}</div>
+					<div class="item-time">3月3</div>
+					<div class="item-img">
+						<img src="/pic/main.jpg" />
+					</div>
+					<div class="item-detail">{{content}}</div>
+				</div>
+			</listitem>
+		{{/each}}
+	</scrollview>
 </script>
-
 <!-- 
 <script type="text/javascript" src="/tpframework.js"></script>
  -->

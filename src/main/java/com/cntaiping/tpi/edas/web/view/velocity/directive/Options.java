@@ -30,7 +30,7 @@ public class Options extends PageActionDirective {
 	public boolean render(InternalContextAdapter context, Writer writer, Node node)
 			throws IOException, ResourceNotFoundException, ParseErrorException, MethodInvocationException {
 		ActionWrapper aw=getActionWrapper(context);
-		PageAction pa=aw.getAction();
+		PageAction pa=(PageAction)aw.getAction();
 		String[] names=pa.getCodeDataHelper();
 		if (names.length>0){
 			writer.write("codeTable:{");

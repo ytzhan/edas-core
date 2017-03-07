@@ -7,10 +7,14 @@ import java.lang.annotation.Target;
 
 import org.springframework.stereotype.Service;
 
+import com.cntaiping.tpi.edas.action.EmptyEntityValidator;
+import com.cntaiping.tpi.edas.action.EntityValidator;
+
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface Action {
 	public String page();
 	public Class<?> entity();
+	public Class<? extends EntityValidator> validator() default EmptyEntityValidator.class;
 }
