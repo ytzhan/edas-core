@@ -5,5 +5,6 @@ Page({
 	},
 	onBackClick:function(){
 		switchPage("policy/index");
-	}
+	},
+   	#codeTable()
 });

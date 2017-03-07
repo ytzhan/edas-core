@@ -12,8 +12,6 @@
 	<classpathentry kind="var" path="M2_REPO/com/alibaba/edas/edas-sdk/1.5.1/edas-sdk-1.5.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/alibaba/druid/1.0.11/druid-1.0.11.jar"/>
-	<classpathentry kind="lib" path="E:/tool/java/jdk1.8.0_74/lib/jconsole.jar"/>
-	<classpathentry kind="lib" path="E:/tool/java/jdk1.8.0_74/lib/tools.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/baomidou/mybatis-plus/2.0.2/mybatis-plus-2.0.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/caucho/hessian/4.0.38/hessian-4.0.38.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"/>

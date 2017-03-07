@@ -239,7 +239,6 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 				}
 			};
 			if (_data)
-
 				_data.bind(_name, _bindFunc);
 			if (!_self.removeHandler){
 				_self.removeHandler=[];
@@ -258,7 +257,7 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 						var _firstValue=undefined;
 						can.each(_options,function(v,k){
 							if (_firstValue==undefined)
-								_firstValue=v;
+								_firstValue=v.value;
 						});
 						if (_firstValue)
 							_vm.data.attr(_vm.name,_firstValue);
@@ -273,9 +272,18 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 				_self.removeHandler.push({name:_name,handler:_bindFunc2});
 			}
 			
-			el.onchange = function() {
+			el.onchange = function() {window._el=this;
 				_data.attr(_name, this.value);
 			};
+			//联动则赋予默认值
+			var _v=_data.attr(_name);
+			if (!_v){
+				can.each(_self.selection,function(v,k){
+					if (!_v)
+						_v=v.value;
+				});
+				_data.attr(_name,_v);
+			}
 			el.value = _data.attr(_name);
 		};
 	};

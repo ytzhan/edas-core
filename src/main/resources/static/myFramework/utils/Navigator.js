@@ -15,10 +15,17 @@ define(["myFramework/MyExports","myFramework/ui/popup/Mask"], function(exports,M
 	}
 
 	function navigateTo(name,data) {
+		var __page=name;
+		var iPos=__page.indexOf("?");
+		var _param;
+		if (iPos>0){
+			_param=can.deparam(__page.substring(iPos+1));
+			__page=__page.substring(0,iPos);
+		}
 		var _p = getCurrentPage();
-		if (_p && _p.name == name)
+		if (_p && _p.name == __page)
 			return;
-		var _newPage = getPage(name);
+		var _newPage = getPage(__page);
 		if(_newPage==undefined){
 			Mask.show();
 			_showPage(name,data,true,function(_page){
@@ -33,6 +40,7 @@ define(["myFramework/MyExports","myFramework/ui/popup/Mask"], function(exports,M
 				if (_p)
 					_p.hide();
 			};
+			_newPage.param=_param;
 			_newPage.show(data);
 			Mask.hide();
 		}
