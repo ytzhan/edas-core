@@ -1,5 +1,6 @@
 package com.cntaiping.tpi.web.m1.app2.policy;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,37 +18,15 @@ import com.cntaiping.tpi.edas.demo.dto.UserDto;
 public class Page1Action2 extends PageAction{
 	@RemoteFunction(name = "firstPage", param = NullClass.class)
 	public Object firstPage(){
-		int i=1;
-		ArrayList result=new ArrayList();
-		HashMap paramMap=new HashMap();
-		paramMap.put("a",i*100+23);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+32);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+33);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+34);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+35);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+36);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+37);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+38);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+39);
-		result.add(paramMap);
-
-		HashMap resultMap=new HashMap();
+		ArrayList<Object> result=new ArrayList<Object>();
+		for(int i = 1;i<=8;i++){
+			HashMap<String,Object> paramMap=new HashMap<String,Object>();
+			paramMap.put("url", "/pic/tp.png");
+			paramMap.put("title", "维修任务"+i);
+			paramMap.put("content", "太平财险复业15周年司庆洪荒之礼人性袭来，12月20日零点开始，你准备好了吗？");
+			paramMap.put("time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+			result.add(paramMap);
+		}
 		
 		return this.buildPageResult(result, 10);
 	}
@@ -55,35 +34,15 @@ public class Page1Action2 extends PageAction{
 	
 	@RemoteFunction(name = "nextPage", param = Integer.class)
 	public Object nextPage(int page){
-		int i=page;
-		ArrayList result=new ArrayList();
-		HashMap paramMap=new HashMap();
-		paramMap.put("a",i*100+23);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+32);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+33);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+34);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+35);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+36);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+37);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+38);
-		result.add(paramMap);
-		paramMap=new HashMap();
-		paramMap.put("a",i*100+39);
-		result.add(paramMap);
+		ArrayList<Object> result=new ArrayList<Object>();
+		for(int i = (page-1)*8+1;i<=8*page;i++){
+			HashMap<String,Object> paramMap=new HashMap<String,Object>();
+			paramMap.put("url", "/pic/tp.png");
+			paramMap.put("title", "维修任务"+i);
+			paramMap.put("content", "车辆信息。。。出险信息。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
+			paramMap.put("time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+			result.add(paramMap);
+		}
 		return result;
 	}
 	
