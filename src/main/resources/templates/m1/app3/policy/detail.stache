@@ -3,17 +3,17 @@
 </view>
 
 <view title="单选示例1" >		
-	<radio  id="r1" name="radio"  data-selection='{红色:"red",蓝色:"blue"}' />
+	<radio  id="r1" name="radio"  data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]' />
 </view>
 
 <view title="单选示例2" 	>		
-	<radio   name="radio" data-selection='{红色:"red",蓝色:"blue"}' />
+	<radio   name="radio" data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]' />
 </view>
 <view title="多选示例" 	>		
-	<checkbox id="ch1"  name="ch" data-selection='{苹果:"apple",香蕉:"banana"}'  />
+	<checkbox id="ch1"  name="ch" data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]'  />
 </view>
 <view title="多选示例" 	>		
-	<checkbox   name="ch"   data-selection='{苹果:"apple",香蕉:"banana"}' />
+	<checkbox   name="ch"  data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]' />
 </view>
 
 <view title="我的信息" id="toast">

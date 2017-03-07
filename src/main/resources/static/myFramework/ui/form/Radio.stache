@@ -1,8 +1,8 @@
 {{#if selection}}
 	{{#each selection}}
 		<label class="flex space-between  divider has-padding no-margin" style="justify-content:{{_align}} !important;{{hidden}} !important">
-				<span>{{@key}}</span>
-				<input {{radioValue}} class="radio"  type="radio"  value="{{.}}">
+				<span>{{label}}</span>
+				<input {{radioValue}} class="radio"  type="radio"  value="{{value}}">
 			{{#if error.flag}}
 				<div class="help-text text-important has-padding">
 				{{error.message}}
