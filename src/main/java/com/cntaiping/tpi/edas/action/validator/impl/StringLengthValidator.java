@@ -31,7 +31,7 @@ public class StringLengthValidator implements IValidator {
 			len = value.length();
 		}
 		if (len < minLen || len > maxLen) {
-			error.rejectValue(route, MessageFormat.format("长度{0}不在区间内【{1}-{2}】", len, minLen, maxLen));
+			error.rejectFieldError(route, MessageFormat.format("长度{0}不在区间内【{1}-{2}】", len, minLen, maxLen));
 		}
 	}
 

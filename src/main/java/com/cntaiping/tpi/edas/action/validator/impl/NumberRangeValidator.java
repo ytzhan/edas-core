@@ -23,7 +23,7 @@ public class NumberRangeValidator implements IValidator {
 	public void validate(String route, Object data, Errors error) {
 		BigDecimal value = new BigDecimal(String.valueOf(data));
 		if (value.compareTo(min) < 0 || value.compareTo(max) > 0) {
-			error.rejectValue(route, value + " 不在区间【" + min + "-" + max + "]内");
+			error.rejectFieldError(route, value + " 不在区间【" + min + "-" + max + "]内");
 		}
 	}
 

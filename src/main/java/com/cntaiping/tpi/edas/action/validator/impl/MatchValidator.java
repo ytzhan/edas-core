@@ -21,7 +21,7 @@ public class MatchValidator implements IValidator {
 	public void validate(String route, Object data, Errors error) {
 		String value = (String) data;
 		if(!value.matches(match)){
-			error.rejectValue(route, MessageFormat.format("{0}与模式【{1}】不匹配", value, match));
+			error.rejectFieldError(route, MessageFormat.format("{0}与模式【{1}】不匹配", value, match));
 		}
 	}
 }

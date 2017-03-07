@@ -15,9 +15,9 @@ public class RequiredValidator implements IValidator {
 	@Override
 	public void validate(String route, Object data, Errors error) {
 		if (data instanceof String && StringUtils.isBlank((String) data)) {
-			error.rejectValue(route, "字段为空");
+			error.rejectFieldError(route, "字段为空");
 		} else if (data == null) {
-			error.rejectValue(route, "字段为空");
+			error.rejectFieldError(route, "字段为空");
 		}
 	}
 }

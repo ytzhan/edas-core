@@ -7,7 +7,7 @@ import com.cntaiping.tpi.edas.action.validator.Errors;
 import com.cntaiping.tpi.edas.action.validator.ValidatorDef;
 import com.cntaiping.tpi.edas.action.validator.ValidatorFactory;
 
-public abstract class EntityValidator {
+public abstract class EntityValidator<T> {
 	private ValidatorFactory validatorFactory;
 	private Map<String, ValidatorDef> validatorDefs = new HashMap<String, ValidatorDef>(8);
 
@@ -27,12 +27,16 @@ public abstract class EntityValidator {
 		def.addValidatorCfg(validatorFactory, validator, params);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Errors valid(Object target) {
 		Errors errors = new Errors();
-		for(ValidatorDef def:validatorDefs.values()){
+		for (ValidatorDef def : validatorDefs.values()) {
 			def.validate(target, errors);
 		}
+		customValid((T)target, errors);
 		return errors;
 	}
 
+	public void customValid(T target, Errors errors) {
+	}
 }

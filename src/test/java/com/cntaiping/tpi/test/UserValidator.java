@@ -1,8 +1,11 @@
 package com.cntaiping.tpi.test;
 
-import com.cntaiping.tpi.edas.action.EntityValidator;
+import java.util.Map;
 
-public class UserValidator extends EntityValidator{
+import com.cntaiping.tpi.edas.action.EntityValidator;
+import com.cntaiping.tpi.edas.action.validator.Errors;
+
+public class UserValidator extends EntityValidator<Map<?,?>>{
 
 	@Override
 	public void config() {
@@ -11,6 +14,10 @@ public class UserValidator extends EntityValidator{
 		register("phone", "Match","1[3578][0-9]{9}");
 		register("idCard","StringLength",18,18);
 		register("policy.no","Required");
+	}
+	@Override
+	public void customValid(Map<?, ?> target, Errors errors) {
+		errors.rejectError("S001", "自定义校验错误");
 	}
 
 }

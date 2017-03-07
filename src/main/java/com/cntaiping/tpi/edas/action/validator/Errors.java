@@ -20,11 +20,16 @@ public class Errors {
 		return errors;
 	}
 
-	public void rejectValue(String field, String errMsg) {
+	public void rejectFieldError(String field, String errMsg) {
 		FieldError fe = new FieldError(field, null, errMsg);
 		errors.add(fe);
 	}
-
+	
+	public void rejectError(String errCode, String errMsg) {
+		FieldError fe = new FieldError(null, errCode, errMsg);
+		errors.add(fe);
+	}
+	
 	public boolean isSucc() {
 		return errors.isEmpty();
 	}
