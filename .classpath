@@ -1,69 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" path="src/test/java"/>
-	<classpathentry excluding="**/*.java" kind="src" path="src/test/resources"/>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="M2_REPO/org/mybatis/mybatis/3.4.2/mybatis-3.4.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/mybatis/mybatis-spring/1.3.1/mybatis-spring-1.3.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/alibaba/edas/edas-sdk/1.5.1/edas-sdk-1.5.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/alibaba/druid/1.0.11/druid-1.0.11.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/baomidou/mybatis-plus/2.0.2/mybatis-plus-2.0.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/caucho/hessian/4.0.38/hessian-4.0.38.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-web/1.4.1.RELEASE/spring-boot-starter-web-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter/1.4.1.RELEASE/spring-boot-starter-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot/1.4.1.RELEASE/spring-boot-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.3.3.RELEASE/spring-core-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.3.3.RELEASE/spring-context-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.3.3.RELEASE/spring-aop-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.3.3.RELEASE/spring-beans-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/4.3.3.RELEASE/spring-expression-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-autoconfigure/1.4.1.RELEASE/spring-boot-autoconfigure-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-logging/1.4.1.RELEASE/spring-boot-starter-logging-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.1.7/logback-classic-1.1.7.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.1.7/logback-core-1.1.7.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.7.21/jcl-over-slf4j-1.7.21.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/slf4j/jul-to-slf4j/1.7.21/jul-to-slf4j-1.7.21.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/slf4j/log4j-over-slf4j/1.7.21/log4j-over-slf4j-1.7.21.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-tomcat/1.4.1.RELEASE/spring-boot-starter-tomcat-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-core/8.5.5/tomcat-embed-core-8.5.5.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-el/8.5.5/tomcat-embed-el-8.5.5.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.5/tomcat-embed-websocket-8.5.5.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/5.2.4.Final/hibernate-validator-5.2.4.Final.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.3.0.Final/jboss-logging-3.3.0.Final.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/fasterxml/classmate/1.3.1/classmate-1.3.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.8.3/jackson-databind-2.8.3.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.8.3/jackson-annotations-2.8.3.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.8.3/jackson-core-2.8.3.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/4.3.3.RELEASE/spring-web-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-webmvc/4.3.3.RELEASE/spring-webmvc-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter-velocity/1.4.1.RELEASE/spring-boot-starter-velocity-1.4.1.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-digester/commons-digester/2.1/commons-digester-2.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/velocity/velocity/1.7/velocity-1.7.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.4/commons-lang-2.4.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/velocity/velocity-tools/2.0/velocity-tools-2.0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-chain/commons-chain/1.1/commons-chain-1.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-validator/commons-validator/1.6/commons-validator-1.6.jar"/>
-	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar"/>
-	<classpathentry kind="var" path="M2_REPO/oro/oro/2.0.8/oro-2.0.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/sslext/sslext/1.2-0/sslext-1.2-0.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/struts/struts-core/1.3.8/struts-core-1.3.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/struts/struts-taglib/1.3.8/struts-taglib-1.3.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/struts/struts-tiles/1.3.8/struts-tiles-1.3.8.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context-support/4.3.3.RELEASE/spring-context-support-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.3.3.RELEASE/spring-jdbc-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.3.3.RELEASE/spring-tx-4.3.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="src" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
