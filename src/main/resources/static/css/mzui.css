@@ -5176,7 +5176,12 @@ select+input{
     bottom: 0;
     background: rgba(0,0,0,0.5);
 }
-.item-style1{
+.card1{
+	background:#fff;
+	margin-bottom:5px;
+}
+.card-style1{
+	position: relative;
     border-bottom: 1px solid #ececec;
     padding-left:15px;
     padding-top: 15px;
@@ -5186,7 +5191,7 @@ select+input{
     justify-content:flex-start;
     align-items:center;
 }
-.item-style1-cell{
+.card-style1-cell{
     display: flex;
     flex-direction:column;
   //  align-items: flex-start;
@@ -5196,20 +5201,27 @@ select+input{
     overflow: hidden;
 
 }
-.item-style1-cell>.item-title{
+.card-style1-cell>.card-title{
     font-size: 14px;
     color: #000;
 }
-.item-style1>.img{
+.card-style1>.card-img{
     height: 46px;
     width: 46px;
 }
-
-.item-style1-cell>.item-content{
+.card-style1>.card-img>img{
+	height:100%;
+	widht:100%;
+}
+.card-style1-cell>.card-content{
     margin-top: 2px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+.card-style1-cell>.card-time{
+	position: absolute;
+    right: 15px;
 }
 .card2{
 	border-radius: 5px;

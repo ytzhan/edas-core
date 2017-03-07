@@ -179,7 +179,6 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 			}
 		};
 		this.update=function(data){
-			debugger;
 			if (this._dom){
 				this._dom.remove();					
 				this._dom = undefined;
@@ -193,7 +192,6 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 		};
 		
 		this.backPageHide = function() {
-			debugger;
 			var _page = $("#page");
 			if (_page) {
 				_page.attr("data-page", "");

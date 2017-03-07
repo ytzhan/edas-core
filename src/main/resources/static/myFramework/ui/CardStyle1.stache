@@ -1,11 +1,14 @@
-<div style="background:#fff;margin-bottom: 6px;">
-	<div class="item-style1">
+<div class="card1">
+	<div class="card-style1">
 		{{#if img}}
-			<img src="/pic/tp.png">
+			<div class="card-img">
+				<img src="/pic/tp.png">
+			</div>
 		{{/if}}
-		<div class="item-style1-cell">
-			<span class="item-title">{{title}}</span>
-			<span class="item-content">{{content}}</span>
+		<div class="card-style1-cell">
+			<span class="card-title">{{title}}</span>
+			<span class="card-content">{{content}}</span>
+			<span class="card-time>{{time}}</span>
 		</div>
 	</div>
 	<content/>
