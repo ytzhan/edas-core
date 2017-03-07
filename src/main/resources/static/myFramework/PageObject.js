@@ -57,7 +57,7 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 			if (event.handler) {
 				var $el = $(event.el);
 				$el.off(event.handler);
-				$el.on(event.type, can.proxy(event.handler,_self));
+				$el.on(event.type, can.proxy(event.handler,{page:_self,el:$el,viewModel:event.viewModel}));
 			}
 		}
 
@@ -121,7 +121,8 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 			}
 			if (_result) {
 				if (this._dom){
-					this._dom.remove();					
+					this._dom.remove();		
+					this.elementEvents=[];
 					this._dom = undefined;
 					if (this.onData==undefined)
 						this.data=undefined;

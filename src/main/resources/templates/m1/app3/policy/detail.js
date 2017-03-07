@@ -6,5 +6,8 @@ Page({
 	onBackClick:function(){
 		switchPage("policy/index");
 	},
+	onSearchChanged:function(name,val,vm){
+		alert(name+":"+val);
+	},
    	#codeTable()
 });

@@ -15,7 +15,11 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 	
 	function getFullPath(scope,parentScope){
 		var _result="";
-		var _name=scope.attr("context")||scope.attr("name");
+		var _cName=scope.attr("_cName");
+		if (_cName)
+			_cName=_cName.toUpperCase();
+		var _isDataComponent=(_cName=="VIEW"||_cName=="SCROLLVIEW"||_cName=="LISTITEM"||_cName=="LISTITEMVIEW");
+		var _name=scope.attr("context")||(_isDataComponent?undefined:scope.attr("name"));
 		if (parentScope){
 			var _scope=parentScope;
 			var _index=_scope.attr("index");
@@ -68,6 +72,7 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 		if (_id == undefined||_id=="")
 			_id = this.name || "";
 		var _name = this.name || "";
+		var _self = this;
 		return function(el) {
 			var eventName = "on";
 			eventName = eventName + camelString(_id);
@@ -87,7 +92,8 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 							el : el,
 							name : eventName,
 							type : type,
-							handler : _handler
+							handler : _handler,
+							viewModel : _self
 						});
 				}
 			};
@@ -185,6 +191,11 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 					_self.error.attr("flag",false);
 					_self.error.attr("message",undefined);
 				}
+				var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
+				_eventName="on"+_eventName+"Changed";
+				var _pe=_page[_eventName];
+				if (_pe)
+					_pe(_name,newVal,_self,_data);
 			};
 			if (_data)
 				_data.bind(_name, _bindFunc);
@@ -216,6 +227,8 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 			selectFactory.selectWidget(_self,el)._getSelectionType(_self);
 			
 			var _bindFunc=function(ev, newVal, oldVal) {
+				if (newVal==oldVal)
+					return;
 				if (newVal!=oldVal)
 					if (el.value!=newVal)
 						el.value=newVal;
@@ -237,6 +250,11 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 					_self.error.attr("flag",false);
 					_self.error.attr("message",undefined);
 				}
+				var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
+				_eventName="on"+_eventName+"Changed";
+				var _pe=_page[_eventName];
+				if (_pe)
+					_pe(_name,newVal,_self,_data);
 			};
 			if (_data)
 				_data.bind(_name, _bindFunc);
@@ -278,11 +296,13 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 			//联动则赋予默认值
 			var _v=_data.attr(_name);
 			if (!_v){
-				can.each(_self.selection,function(v,k){
-					if (!_v)
-						_v=v.value;
-				});
-				_data.attr(_name,_v);
+				if (_self.selection){
+					can.each(_self.selection,function(v,k){
+						if (!_v)
+							_v=v.value;
+					});
+					_data.attr(_name,_v);
+				}
 			}
 			el.value = _data.attr(_name);
 		};
@@ -311,6 +331,11 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 							_input.checked=true;
 					});
 				});
+				var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
+				_eventName="on"+_eventName+"Changed";
+				var _pe=_page[_eventName];
+				if (_pe)
+					_pe(_name,newVal,_self,_data);
 			};
 			if (_data&&_data[_name])
 				_data[_name].bind('length', _bindFunc);
@@ -362,8 +387,14 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 		selectFactory.selectWidget(_self,el)._getSelectionType(_self);
 
 			var _bindFunc=function(ev, newVal, oldVal) {
-				if (newVal!=oldVal)
+				if (newVal!=oldVal){
 					el.checked = _data.attr(_name) == el.getAttribute("value")?true:false;
+					var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
+					_eventName="on"+_eventName+"Changed";
+					var _pe=_page[_eventName];
+					if (_pe)
+						_pe(_name,newVal,_self,_data);
+				}
 			};
 			if (_data)
 				_data.bind(_name, _bindFunc);
@@ -394,7 +425,14 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 		return function(el) {
 			if (_data)
 				_data.bind(_name,function(ev, newVal, oldVal){
+					if (newVal==oldVal)
+						return;
 					el.checked=newVal==_options[1];
+					var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
+					_eventName="on"+_eventName+"Changed";
+					var _pe=_page[_eventName];
+					if (_pe)
+						_pe(_name,newVal,_self,_data);
 				});
 			el.checked = _data.attr(_name)==_options[1];
 			el.onclick=function(){

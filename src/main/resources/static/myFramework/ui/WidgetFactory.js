@@ -97,6 +97,8 @@ define(["myFramework/utils/StacheHelpers"],function(_helpers){
 									_self.viewModel.data.unbind(obj.name,obj.handler);
 							}
 						})
+						//情况事件绑定
+						_self.viewModel.removeHandler=undefined;
 					}
 				};
 				if (this.context.events){

@@ -4,6 +4,12 @@ requirejs(["text!myFramework/ui/form/Dropdown.stache","myFramework/ui/WidgetFact
 		config.extendVM=function(vm,attrs,parentScope,el){
 			var _selection = $(el).data("selection");
 			_selection  = (new Function("page","return "+_selection))(vm.page);
+			/*
+			 * 情况1 [{label:2332,value:"weer"}] function js:function(page){return [{label:2332,value:"weer"}]}
+			 * 情况2 page.codeTable.city function js:function(page){return page.codeTable.city}
+			 * 情况2 page.codeTable.city() function js:function(page){return page.codeTable.city()}
+			 * 调用 function(vm.page)
+			 */
 			vm.selection = _selection;
 			var _parentName=$(el).data("parent");
 			vm.parentName = _parentName;
