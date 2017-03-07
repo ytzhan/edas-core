@@ -21,7 +21,7 @@ public class ValidatorTest {
 		policy.put("no", "111111111111111");
 		user.put("policy", Arrays.asList(policy));
 		
-		TestValidator tv = new TestValidator();
+		UserValidator tv = new UserValidator();
 		tv.init(vf);
 		Errors  error = tv.valid(user);
 		System.out.println(error);

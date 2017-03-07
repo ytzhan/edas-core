@@ -2,7 +2,7 @@ package com.cntaiping.tpi.test;
 
 import com.cntaiping.tpi.edas.action.EntityValidator;
 
-public class TestValidator extends EntityValidator{
+public class UserValidator extends EntityValidator{
 
 	@Override
 	public void config() {
