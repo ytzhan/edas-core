@@ -1,4 +1,4 @@
-<view title="搜索框示例">
+<view title="搜索框示例" name=ex">
 		<search tip="请输入您所要查询的关键字" name="search"/>
 </view>
 
@@ -7,7 +7,7 @@
 </view>
 
 <view title="单选示例2" 	>		
-	<radio   name="radio" data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]' />
+	<radio   id="r2" name="radio" data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]' />
 </view>
 <view title="多选示例" 	>		
 	<checkbox id="ch1"  name="ch" data-selection='[{label:"苹果",value:"apple"},{label:"香蕉",value:"banana"}]'  />
@@ -44,18 +44,15 @@
 	<dropdown  name="citys" id="citys" label="城市选择控件" align="right"
 		 data-selection='[{label:"深圳",value:"sz"} ,{label:"珠海",value:"zh"}]'/>
 	<dropdown  label="城市选择控件" name="area" id="area" align="right"
-		data-parent="citys" data-selection='{
-			zh:[{label:"香洲",value:"xz"},{label:"金湾",value:"jw"}],
-   	 		sz:[{label:"南山",value:"ns"},{label:"福田",value:"ft"},{label:"罗湖",value:"lh"}]
-       	}' />
+		  />
 </view>
 
 
 <view title="下拉选择示例" 	>	
-	<dropdown_mobi  label="城市选择" name="chose1"  id="new"
+	<dropdown_mobi  label="城市选择" name="chose1"  id="chose1"
 		data-selection='page.codeTable.city'/>
 	<dropdown_mobi  label="城市选择" name="chose2"  id="chose2" 
-		data-parent="chose1" data-selection='page.codeTable.citys' />
+		 />
 </view>
 
 <view title="grounp option示例" >	

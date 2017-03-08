@@ -42,7 +42,7 @@ define(["myFramework/utils/StacheHelpers"],function(_helpers){
 				var _data=can.getObject(_contextName,parentScope.attr("data")||_root.attr("data"));
 				var hide = attrs.hide == "true" ? "display:none":undefined;
 				var vm= {
-					_cName:el.tagName,
+					_cName:el.tagName.toLowerCase(),
 					id:$(el).attr("id"),
 					tag:undefined,	
 					name:undefined,
@@ -120,10 +120,15 @@ define(["myFramework/utils/StacheHelpers"],function(_helpers){
 					var _callback=callback;
 					var _result=function(el){
 						if (el){
-							return new function(el){
-								this.vm=$(el).viewModel();
+							if(can.isMapLike(el)){
+								this.vm = el;
 								_callback(this);
-							}(el);
+							}else{
+								return new function(el){
+									this.vm=$(el).viewModel();
+									_callback(this);
+								}(el);
+							}
 						}else{
 							return new function(){
 								this.vm=$(_tag).viewModel();

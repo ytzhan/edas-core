@@ -196,6 +196,7 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 				var _pe=_page[_eventName];
 				if (_pe)
 					_pe(_name,newVal,_self,_data);
+				
 			};
 			if (_data)
 				_data.bind(_name, _bindFunc);
@@ -224,7 +225,7 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 	
 		return function(el) {
 
-			selectFactory.selectWidget(_self,el)._getSelectionType(_self);
+			//selectFactory.selectWidget(_self,el)._getSelectionType(_self);
 			
 			var _bindFunc=function(ev, newVal, oldVal) {
 				if (newVal==oldVal)
@@ -253,8 +254,11 @@ define([ "myFramework/MyExports","myFramework/ui/SelectFactory" ],function(expor
 				var _eventName=camelString(getFullPath(_self,_self.attr("parentScope"))).replace(new RegExp("\\.","gm"),"");
 				_eventName="on"+_eventName+"Changed";
 				var _pe=_page[_eventName];
-				if (_pe)
-					_pe(_name,newVal,_self,_data);
+				if (_pe){
+					_pe.call({name:_name,newVal:newVal,cmp:_self._cName.toLowerCase(),_data:_data});
+					
+				}
+					
 			};
 			if (_data)
 				_data.bind(_name, _bindFunc);

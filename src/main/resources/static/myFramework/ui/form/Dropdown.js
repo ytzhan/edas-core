@@ -43,6 +43,20 @@ requirejs(["text!myFramework/ui/form/Dropdown.stache","myFramework/ui/WidgetFact
 		_widget.align=function(value){
 			this.vm.attr("align",value== undefined?"left":(value == "right" ? "flex-end" :"center"));
 		};
+		_widget.setSelection = function(def){
+			var _self = this;
+			if(def){
+				if(can.isDeferred(def)){
+					def.then(function(success){
+						var _selection = (new Function("return"+success))();
+						_selection = _selection.data;
+						_self.vm.attr("selection",_selection);
+					},function(reason){
+						exports.Mask.toast(reason);
+					})
+				}
+			}
+		}
 	});
 });
 
