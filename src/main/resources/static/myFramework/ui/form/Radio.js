@@ -12,6 +12,19 @@ requirejs(["text!myFramework/ui/form/Radio.stache","myFramework/ui/WidgetFactory
 			_widget.align=function(value){
 				this.vm.attr("align",value== undefined?"left":(value == "right" ? "flex-end" :"center"));
 			};
+			_widget.getSelection  = function(def){
+				var _self = this;
+				if(def){
+					if(can.isDeferred(def)){
+						def.then(function(success){
+							var _selection = (new Function("page","return "+success))(_self.vm.page);
+							_self.vm.attr("selection",_selection.data);
+						},function(reason){
+							exports.Mask.toast(reason);
+						})
+					}
+				}
+			};
 		});
 });
 	

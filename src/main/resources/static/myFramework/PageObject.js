@@ -32,6 +32,7 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 	;
 
 	function PageObject(options) {
+		
 		this._dom = undefined;
 		this.template = "";
 
@@ -102,7 +103,7 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 			var self=this;
 			if (can.isDeferred(_data)){
 				_data.then(function(___data){
-					__render(self,___data);
+					__render(self,___data.data);
 				},function(){
 					alert("数据调用错误！");
 				});

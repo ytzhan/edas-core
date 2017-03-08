@@ -17,6 +17,7 @@ public class Detail3Action extends PageAction{
 	public Student defaultEntity(String id){
 		Student student=new Student();
 		student.setName(id);
+		student.setRadio("apple");
 		student.setEmail("@cntaiping.com");
 		return student;
 	}
