@@ -16,17 +16,24 @@ var _getResultData = function(re,vm){
 	vm.attr("mask",true);
 	if(can.isDeferred(re)){
 		re.then(function(_jsonData){
-			//var _jsonData = (new Function("return " + success))();
-			if(_jsonData.count){
-				vm.attr("count",_jsonData.count);
-				if(vm.attr("currentPage") == 1)
-					vm.attr("nextClass", _jsonData.count> 1 ? "primary" : "gray");	
-			}
-			if(_jsonData.data){
-				vm.attr("data", _jsonData.data);
-				//vm.attr("mask",false);
+			if (_jsonData.status=="SUCC"){
+				if(_jsonData.data.count){
+					vm.attr("count",_jsonData.data.count);
+					if(vm.attr("currentPage") == 1)
+						vm.attr("nextClass", _jsonData.data.count> 1 ? "primary" : "gray");	
+				}
+				if(_jsonData.data.data){
+					vm.attr("data", _jsonData.data.data);
+					//vm.attr("mask",false);
+				}else{
+					vm.attr("data", _jsonData.data.data);
+				}
 			}else{
-				vm.attr("data", _jsonData);
+				var _errors="";
+				can.each(___data.errors,function(v,k){
+					_errors=_errors+v.errMsg;
+				});
+				alert(_errors);
 			}
 		},function(fail){
 			exports.Mask.toast(fail.message);

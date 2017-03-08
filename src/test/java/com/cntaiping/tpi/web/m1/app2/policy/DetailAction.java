@@ -16,13 +16,14 @@ public class DetailAction extends PageAction{
 	public Student defaultEntity(String id){
 		Student student=new Student();
 		student.setName(id);
+		student.setField1("ghghghhjhjhj");
 		student.setEmail("@cntaiping.com");
 		return student;
 	}
 	
 	@EntityEvent(name="onSureClick")
 	public Student save(Student entity){
-		entity.setName(entity.getName()+" save...."+new Date());
+		entity.setName(entity.getName()+" save12223...."+new Date());
 		return entity;
 	}
 }

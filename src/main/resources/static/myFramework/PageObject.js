@@ -103,7 +103,15 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 			var self=this;
 			if (can.isDeferred(_data)){
 				_data.then(function(___data){
-					__render(self,___data.data);
+					if (___data.status=="SUCC")
+						__render(self,___data.data);
+					else{
+						var _errors="";
+						can.each(___data.errors,function(v,k){
+							_errors=_errors+v.errMsg;
+						});
+						alert(_errors);
+					}
 				},function(){
 					alert("数据调用错误！");
 				});

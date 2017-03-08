@@ -167,7 +167,15 @@ define(["myFramework/MyExports","myFramework/ui/popup/Mask"], function(exports,M
 				if (callback){
 					var _self=this;
 					_deferred.then(function(_data){
-							callback.call(_self,_data);
+							if (___data.status=="SUCC")
+								callback.call(_self,_data);
+							else{
+								var _errors="";
+								can.each(___data.errors,function(v,k){
+									_errors=_errors+v.errMsg;
+								});
+								alert(_errors);
+							}
 						},function(){
 							alert("远程调用 "+url+" 失败..");
 					});
@@ -186,7 +194,15 @@ define(["myFramework/MyExports","myFramework/ui/popup/Mask"], function(exports,M
 				if (callback){
 					var _self=this;
 					_deferred.then(function(_data){
-							callback.call(_self,_data);
+							if (___data.status=="SUCC")
+								callback.call(_self,_data);
+							else{
+								var _errors="";
+								can.each(___data.errors,function(v,k){
+									_errors=_errors+v.errMsg;
+								});
+								alert(_errors);
+							}
 						},function(){
 							alert("远程调用 "+url+" 失败..");
 					});
