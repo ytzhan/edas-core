@@ -111,6 +111,7 @@ define(["myFramework/utils/Template","myFramework/AppObject","myFramework/ui/Dia
 							_errors=_errors+v.errMsg;
 						});
 						alert(_errors);
+						__render(self,self.data);
 					}
 				},function(){
 					alert("数据调用错误！");

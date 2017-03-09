@@ -44,10 +44,10 @@
 					return []
 				},
 				onScollViewClick:function(pageNum){
-					return #remote("index/nextPage").post(pageNum)#end
+					return remote("index/nextPage").post(pageNum)
 				},
 				onScollViewData:function(){
-					return #remote("index/firstPage").post({})#end
+					return remote("index/firstPage").post({})
 				}
 			}));
 		}

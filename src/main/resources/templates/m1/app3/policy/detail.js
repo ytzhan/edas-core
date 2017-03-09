@@ -1,7 +1,6 @@
-Page({
-	#entityEvents(),
+#Page(){
 	onData:function(){
-		return #remote("detail/find").post(this.param.id)#end;
+		return this.rpcs.find.post(this.param.id);
 	},
 	onBackClick:function(){
 		switchPage("policy/index");
@@ -23,6 +22,5 @@ Page({
 		if($("#chose2").viewModel().mobi){
 			$("#chose2").viewModel().mobi.init();
 		}
-	},
-   	#codeTable()
-});
+	}
+}#end
