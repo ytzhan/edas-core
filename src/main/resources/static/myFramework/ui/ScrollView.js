@@ -19,8 +19,9 @@ var _getResultData = function(re,vm){
 			if (_jsonData.status=="SUCC"){
 				if(_jsonData.data.pages){
 					vm.attr("count",_jsonData.data.pages);
-					if(vm.attr("currentPage") == 1)
-						vm.attr("nextClass", _jsonData.data.count> 1 ? "primary" : "gray");	
+					if(vm.attr("currentPage") == 1){
+						vm.attr("nextClass", _jsonData.data.pages> 1 ? "primary" : "gray");	
+					}
 					vm.attr("data", _jsonData.data.data);
 				}else{
 					vm.attr("data", _jsonData.data);
