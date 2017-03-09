@@ -8,9 +8,10 @@ import com.cntaiping.tpi.edas.annotation.EntityEvent;
 import com.cntaiping.tpi.edas.annotation.EntityFunction;
 import com.cntaiping.tpi.edas.annotation.RemoteFunction;
 import com.cntaiping.tpi.web.m1.app2.policy.dto.Student;
+import com.cntaiping.tpi.web.m1.app2.policy.validator.StudentValidator;
 
 
-@Action(page="detail",entity=Student.class)
+@Action(page="detail",entity=Student.class,validator=StudentValidator.class)
 public class DetailAction extends PageAction{
 	@RemoteFunction(name="find",param=String.class)
 	public Student defaultEntity(String id){

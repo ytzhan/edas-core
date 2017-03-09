@@ -11,6 +11,7 @@ public class UserValidator extends EntityValidator<Map<?,?>>{
 	public void config() {
 		register("name", "Required");
 		register("age", "NumberRange",18,45);
+		register("date,","2011-01-01","2017-01-01");
 		register("phone", "Match","1[3578][0-9]{9}");
 		register("idCard","StringLength",18,18);
 		register("policy.no","Required");

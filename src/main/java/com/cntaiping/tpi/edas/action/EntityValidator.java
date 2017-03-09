@@ -25,6 +25,10 @@ public abstract class EntityValidator<T> {
 		}
 		def.addValidatorCfg(validatorFactory, validator, params);
 	}
+	
+	public void register(String path, String validator) {
+		register(path, validator,new Object[0]);
+	}
 
 	@SuppressWarnings("unchecked")
 	public Result valid(Object target,Result errors) {
