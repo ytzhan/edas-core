@@ -16,5 +16,5 @@ import com.cntaiping.tpi.edas.action.EntityValidator;
 public @interface Action {
 	public String page();
 	public Class<?> entity();
-	public Class<? extends EntityValidator> validator() default EmptyEntityValidator.class;
+	public Class<? extends EntityValidator<?>> validator() default EmptyEntityValidator.class;
 }

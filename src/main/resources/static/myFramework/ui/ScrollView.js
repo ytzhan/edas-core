@@ -17,16 +17,13 @@ var _getResultData = function(re,vm){
 	if(can.isDeferred(re)){
 		re.then(function(_jsonData){
 			if (_jsonData.status=="SUCC"){
-				if(_jsonData.data.count){
-					vm.attr("count",_jsonData.data.count);
+				if(_jsonData.data.pages){
+					vm.attr("count",_jsonData.data.pages);
 					if(vm.attr("currentPage") == 1)
 						vm.attr("nextClass", _jsonData.data.count> 1 ? "primary" : "gray");	
-				}
-				if(_jsonData.data.data){
 					vm.attr("data", _jsonData.data.data);
-					//vm.attr("mask",false);
 				}else{
-					vm.attr("data", _jsonData.data.data);
+					vm.attr("data", _jsonData.data);
 				}
 			}else{
 				var _errors="";
@@ -44,8 +41,8 @@ var _getResultData = function(re,vm){
 		});
 		_getResultData(success,vm);
 	}else if(typeof re == "object"){
-		if (re.count){
-			vm.attr("count",re.count);
+		if (re.pages){
+			vm.attr("count",re.pages);
 		}
 		if (re.data){
 			vm.attr("data",re.data);

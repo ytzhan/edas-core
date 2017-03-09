@@ -6,9 +6,11 @@ import java.util.Map;
 import com.cntaiping.tpi.edas.web.view.codedata.CodeDataHelper;
 
 public abstract class PageAction{
-	protected Result buildPageResult(Object data,int pageCount){
-		Result result = new Result();
-		return result.attachCount(pageCount).attachData(data);
+	protected Object buildPageResult(Object data,int pages){
+		HashMap<String,Object> map = new HashMap<String,Object>(2);
+		map.put("data", data);
+		map.put("pages", pages);
+		return map;
 	}
 	
 	private Map<String,CodeDataHelper> codeDataHelpers=new HashMap<String,CodeDataHelper>();

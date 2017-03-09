@@ -34,15 +34,7 @@ public class Result {
 
 	private Object data;
 	
-	private Integer count;
 	
-	public Result attachCount(Integer count) {
-		this.count = count;
-		return this;
-	}
-	public Integer getCount() {
-		return count;
-	}
 
 	public List<Error> getErrors() {
 		return errors;
@@ -64,7 +56,6 @@ public class Result {
 		if(data instanceof Result){
 			Result src = (Result) data;
 			this.data = src.data;
-			this.count = src.count;
 			this.status = src.status;
 			this.errors.addAll(src.errors);
 		}else{
