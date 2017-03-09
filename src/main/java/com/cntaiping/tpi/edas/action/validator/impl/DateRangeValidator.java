@@ -45,7 +45,7 @@ public class DateRangeValidator implements IValidator {
 	@Override
 	public void validate(String route, Object data, Result error) {
 		Date value = (Date) data;
-		if (value.compareTo(min) < 0 || value.compareTo(max) > 0) {
+		if (value == null || value.compareTo(min) < 0 || value.compareTo(max) > 0) {
 			error.rejectFieldError(route, value + " 不在区间【" + sdf.get().format(min) + "-" + sdf.get().format(max) + "]内");
 		}
 	}

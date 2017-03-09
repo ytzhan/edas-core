@@ -10,7 +10,7 @@ public class StudentValidator extends EntityValidator<Student>{
 	public void config() {
 		register("name", "Required");
 		register("startDate", "DateRange", "2017-01-01","2018-01-01");
-		register("email", "Match","[a-zA-z0-9_.]+@[a-zA-z0-9_.]");
+		register("email", "Match","[a-zA-z0-9_.]+@[a-zA-z0-9_.]+");
 	}
 	@Override
 	public void customValid(Student target, Result errors) {

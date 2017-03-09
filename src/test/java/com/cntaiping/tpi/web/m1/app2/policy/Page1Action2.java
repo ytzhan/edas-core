@@ -21,6 +21,7 @@ public class Page1Action2 extends PageAction{
 		ArrayList<Object> result=new ArrayList<Object>();
 		for(int i = 1;i<=8;i++){
 			HashMap<String,Object> paramMap=new HashMap<String,Object>();
+			paramMap.put("a", i);
 			paramMap.put("url", "/pic/tp.png");
 			paramMap.put("title", "维修任务"+i);
 			paramMap.put("content", "太平财险复业15周年司庆洪荒之礼人性袭来，12月20日零点开始，你准备好了吗？");
